@@ -2,7 +2,7 @@
   "name": "advent-of-code",
   "version": "1.0.0",
   "description": "",
-  "main": "day-1/index.js",
+  "main": "day-1/day1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
