@@ -31,6 +31,25 @@ function _checkReport(values, check) {
     results.push({ diff, isAscendOrDescend });
   }
 
+  let ascendCount = 0;
+  let descendCount = 0;
+
+  results.forEach((result) => {
+    if (result.isAscendOrDescend) {
+      ascendCount += 1;
+    } else {
+      descendCount += 1;
+    }
+  });
+
+  if (descendCount === 1) {
+    results = results.filter((val) => val.isAscendOrDescend)
+  }
+
+  if (ascendCount === 1) {
+    results = results.filter((val) => !val.isAscendOrDescend)
+  }
+
   const set = new Set(results.map((val) => val.diff));
   const isChangingConsistently = results.every((val) => val.isAscendOrDescend === true);
   const isChangingAcceptably = [...set].every((val) => val > 0 && val < 4)

@@ -36,9 +36,7 @@ describe('Day 2', () => {
   });
 
   describe('Unhappy paths', () => {
-    const unhappyTests = [
-      "8 6 4 4 1",
-      "1 3 2 4 5",
+    const unhappyTests = [,
       "9 7 6 2 1",
       "1 2 7 8 9"
     ];
@@ -53,16 +51,28 @@ describe('Day 2', () => {
   describe('Full solution', () => {
     it('correctly determines how many reports have passed', () => {
       const testInput = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-2/inputs/test-input.txt').toString();
-      const expected = 2;
+      const expected = 4;
 
       expect(validateReports(testInput)).to.eq(expected);
     });
 
     it('correctly calculates solution', () => {
       const solutionInput = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-2/inputs/solution-input.txt').toString();
-      const expected = 463;
+      const expected = 489;
 
       expect(validateReports(solutionInput)).to.eq(expected);
     })
+  });
+
+  describe('Part two', () => {
+    it('Passes when removing one bad level', () => {
+      const input = "1 3 2 4 5";
+      const input2 = "8 6 4 4 1";
+      const input3 = "6 7 10 16 13";
+
+      expect(validateReport(input)).to.be.true;
+      expect(validateReport(input2)).to.be.true;
+      expect(validateReport(input3)).to.be.true; // failing
+    });
   });
 });
