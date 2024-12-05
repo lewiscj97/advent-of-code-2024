@@ -1,5 +1,5 @@
-var expect = require('chai').expect;
-const { processInput } = require('./index');
+const expect = require('chai').expect;
+const { processInput, calculateDistances } = require('./index');
 
 describe('Day 1', () => {
 
@@ -23,5 +23,12 @@ describe('Day 1', () => {
 
     expect(output.left).to.deep.equal([1, 2, 3, 3, 3, 4]);
     expect(output.right).to.deep.equal([3, 3, 3, 4, 5, 9]);
+  });
+
+  it('should calculate the distance', () => {
+    const lists = processInput(testInput);
+    const expected = 11;
+
+    expect(calculateDistances(lists)).to.equal(expected);
   });
 });

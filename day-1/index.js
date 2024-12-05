@@ -15,4 +15,18 @@ function processInput(input) {
   return { left,right }
 }
 
-module.exports = { processInput }
+function calculateDistances(lists) {
+  const listLength = lists.left.length;
+
+  let totalDistance = 0;
+
+  for (let i = 0; i < listLength; i++) {
+    let leftVal = lists.left[i];
+    let rightVal = lists.right[i];
+    totalDistance += Math.abs(leftVal - rightVal);
+  }
+
+  return totalDistance;
+}
+
+module.exports = { processInput, calculateDistances }
