@@ -1,9 +1,10 @@
 const expect = require('chai').expect;
-const { processInput, calculateDistances } = require('./index');
+const { processInput, calculateDistances, calculateSimilarityScore } = require('./index');
 const fs = require('fs')
 
 describe('Day 1', () => {
   const testInput = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-1/inputs/test-input.txt').toString();
+  const solutionInput = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-1/inputs/input.txt').toString();
 
   it('should process an input and store it as an object', () => {
     console.log(testInput)
@@ -28,12 +29,26 @@ describe('Day 1', () => {
   });
 
   it('should output the solution', () => {
-    const fileContents = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-1/inputs/input.txt').toString();
-
-    const processedInput = processInput(fileContents);
+    const processedInput = processInput(solutionInput);
     const output = calculateDistances(processedInput);
 
     const expected = 1506483;
     expect(output).to.equal(expected);
+  });
+
+  it('should calculate the similarity score for test data', () => {
+    const processedInput = processInput(testInput);
+    const expected = 31;
+
+    const output = calculateSimilarityScore(processedInput);
+    expect(output).to.eq(expected);
+  });
+
+  it('should calculate the similarity score for input data', () => {
+    const processedInput = processInput(solutionInput);
+    const expected = 23126924;
+
+    const output = calculateSimilarityScore(processedInput);
+    expect(output).to.eq(expected);
   });
 });

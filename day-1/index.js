@@ -29,4 +29,21 @@ function calculateDistances(lists) {
   return totalDistance;
 }
 
-module.exports = { processInput, calculateDistances }
+function calculateSimilarityScore(lists) {
+  const listLength = lists.left.length;
+
+  let similarityScore = 0;
+
+  for (let i = 0; i < listLength; i++) {
+    const val = lists.left[i];
+    let valCount = 0;
+
+    lists.right.forEach((x) => x === val && valCount++);
+    similarityScore += valCount * val;
+  }
+
+  return similarityScore;
+}
+
+
+module.exports = { processInput, calculateDistances, calculateSimilarityScore }
