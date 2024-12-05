@@ -1,45 +1,33 @@
 function validateReport(input) {
   const values = input.split(' ').map((val) => parseInt(val));
-
-  return ascendingCheck(values) || descendingCheck(values);
+  return _checkReport(values, _isAscending) || _checkReport(values, _isDescending);
 }
 
-function descendingCheck(values) {
+function _isAscending(next, current) {
+  return next > current;
+}
+
+function _isDescending(next, current) {
+  return next < current;
+}
+
+function _checkReport(values, check) {
   let results = [];
 
   for (let i = 0; i < values.length - 1; i++) {
     const current = values[i];
     const next = values[i + 1];
     const diff = Math.abs(next - current);
-    const isDescending = next < current;
-    const map = { diff, isDescending }
+    const isChanging = check(next, current); // naming
+    const map = { diff, isChanging }
     results.push(map);
   }
 
-  const isDescending = results.every((val) => val.isDescending === true);
+  const isChanging = results.every((val) => val.isChanging === true);
   const set = new Set(results.map((val) => val.diff));
   const isConstantDifference = set.size === 1 && set.values().next().value > 0 && set.values().next().value < 4;
 
-  return isDescending && isConstantDifference;
-}
-
-function ascendingCheck(values) {
-  let results = [];
-
-  for (let i = 0; i < values.length - 1; i++) {
-    const current = values[i];
-    const next = values[i + 1];
-    const diff = Math.abs(next - current);
-    const isAscending = next > current;
-    const map = { diff, isAscending }
-    results.push(map);
-  }
-
-  const isAscending = results.every((val) => val.isAscending === true);
-  const set = new Set(results.map((val) => val.diff));
-  const isConstantAllowedIncrease = set.size === 1 && set.values().next().value > 0 && set.values().next().value < 4;
-
-  return isAscending && isConstantAllowedIncrease;
+  return isChanging && isConstantDifference;
 }
 
 module.exports = { validateReport }
