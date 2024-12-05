@@ -1,6 +1,6 @@
 function processInput(input) {
-  const left = [];
-  const right = [];
+  let left = [];
+  let right = [];
 
   const split = input.split("\n");
   split.forEach((pair) => {
@@ -8,6 +8,9 @@ function processInput(input) {
     left.push(parseInt(pairSplit[0], 10));
     right.push(parseInt(pairSplit[1], 10));
   });
+
+  left = left.sort();
+  right = right.sort();
 
   return { left,right }
 }
