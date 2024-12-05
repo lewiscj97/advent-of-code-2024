@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
-const { processInput, calculateDistances, calculateSimilarityScore } = require('./index');
-const fs = require('fs')
+const { processInput, calculateDistances, calculateSimilarityScore } = require('./day1');
+const fs = require('fs');
 
 describe('Day 1', () => {
   const testInput = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-1/inputs/test-input.txt').toString();
