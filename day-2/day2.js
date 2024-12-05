@@ -25,9 +25,8 @@ function _checkReport(values, check) {
 
   const isChanging = results.every((val) => val.isChanging === true);
   const set = new Set(results.map((val) => val.diff));
-  const isConstantDifference = set.values().next().value > 0 && set.values().next().value < 4;
-
-  return isChanging && isConstantDifference;
+  const isChangingAcceptably = [...set].every((val) => val > 0 && val < 4)
+  return isChanging && isChangingAcceptably;
 }
 
 module.exports = { validateReport }
