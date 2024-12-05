@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
-const { validateReport } = require('./day2');
-const fs = require("fs");
+const { validateReport, validateReports } = require('./day2');
+const fs = require('fs');
 
 describe('Day 2', () => {
   describe('Ascending values', () => {
@@ -48,5 +48,21 @@ describe('Day 2', () => {
         expect(validateReport(val)).to.be.false;
       });
     });
+  });
+
+  describe('Full solution', () => {
+    it('correctly determines how many reports have passed', () => {
+      const testInput = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-2/inputs/test-input.txt').toString();
+      const expected = 2;
+
+      expect(validateReports(testInput)).to.eq(expected);
+    });
+
+    it('correctly calculates solution', () => {
+      const solutionInput = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-2/inputs/solution-input.txt').toString();
+      const expected = 463;
+
+      expect(validateReports(solutionInput)).to.eq(expected);
+    })
   });
 });
