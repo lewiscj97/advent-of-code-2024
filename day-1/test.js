@@ -32,6 +32,8 @@ describe('Day 1', () => {
 
     const processedInput = processInput(fileContents);
     const output = calculateDistances(processedInput);
-    console.log(output); // 1506483
+
+    const expected = 1506483;
+    expect(output).to.equal(expected);
   });
 });
