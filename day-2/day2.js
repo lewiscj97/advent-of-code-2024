@@ -25,7 +25,7 @@ function _checkReport(values, check) {
 
   const isChanging = results.every((val) => val.isChanging === true);
   const set = new Set(results.map((val) => val.diff));
-  const isConstantDifference = set.size === 1 && set.values().next().value > 0 && set.values().next().value < 4;
+  const isConstantDifference = set.values().next().value > 0 && set.values().next().value < 4;
 
   return isChanging && isConstantDifference;
 }
