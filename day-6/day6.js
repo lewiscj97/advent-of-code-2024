@@ -1,18 +1,19 @@
 // check what is in the cell directly in the direction of the guard
 // move if they can
 
-const DIRECTIONS = {
-  '^': 'UP',
-  '>': 'RIGHT',
-  '<': 'LEFT',
-  'v': 'DOWN',
-};
+const { DIRECTIONS, MOVE_DELTAS } = require('./constants');
 
-const MOVE_DELTAS = {
-  'UP': [-1, 0],
-  'DOWN': [1, 0],
-  'LEFT': [0, -1],
-  'RIGHT': [0, 1],
+function moveGuard(matrix, currentLocation) {
+  const { location: [x, y], direction } = currentLocation;
+  const [deltaX, deltaY] = MOVE_DELTAS[direction];
+
+  const newX = x + deltaX;
+  const newY = y + deltaY;
+
+  matrix[newX][newY] = currentLocation.location;
+  matrix[x][y] = currentLocation.direction;
+
+  return matrix;
 }
 
 function identifyNextLocation(matrix, currentLocation) {
@@ -53,4 +54,4 @@ function createMatrix(input) {
   return matrix;
 }
 
-module.exports = { createMatrix, locateGuard, identifyNextLocation }
+module.exports = { createMatrix, locateGuard, identifyNextLocation, moveGuard }
