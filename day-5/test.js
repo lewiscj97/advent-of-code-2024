@@ -1,5 +1,11 @@
 const expect = require('chai').expect;
-const { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs, getIncorrectlyOrderedInputs} = require('./day5');
+const {
+  sanitiseRules,
+  sanitiseInput,
+  isInputOrdered,
+  getSumOfValidMiddlePageInputs,
+  getIncorrectlyOrderedInputs
+} = require('./day5');
 const fs = require('fs');
 
 describe('Day 5', () => {
@@ -104,6 +110,13 @@ describe('Day 5', () => {
       expect(output).to.deep.eq(incorrectVals);
     });
 
+    it('sorts input', () => {
+      const input = [75, 97, 47, 61, 53];
+      const expected = [97, 75, 47, 61, 53];
 
+      const output = sortInput(sanitisedRules, input);
+
+      expect(output).to.deep.eq(expected);
+    });
   });
 });
