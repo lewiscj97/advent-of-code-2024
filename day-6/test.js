@@ -1,6 +1,5 @@
 const expect = require('chai').expect;
-const { createMatrix, locateGuard } = require('./day6');
-
+const { createMatrix, locateGuard, identifyNextLocation } = require('./day6');
 
 describe('Day 6', () => {
   const input =
@@ -45,5 +44,17 @@ describe('Day 6', () => {
     const output = locateGuard(matrix);
 
     expect(output.direction).to.eq(expected);
+  });
+
+  it('identifies the next location', () => {
+    const currentLocation = {
+      location: [6, 4],
+      direction: 'UP',
+    };
+
+    const expected = '.';
+    const output = identifyNextLocation(matrix, currentLocation);
+
+    expect(output).to.eq(expected);
   });
 });
