@@ -1,18 +1,22 @@
 function countXmas(matrix) {
-  const count = _inVerticalLine(matrix) + _inHorizontalLine(matrix) + _reverseHorizontal(matrix);
+  let count = 0;
+  const permutations = [
+    [0,1],
+    [0,-1],
+    [1,0],
+    [-1,0],
+    [1,1],
+    [-1,1],
+    [1,-1],
+    [-1,-1]
+  ];
+
+  permutations.forEach((coords) => {
+    count += countXmasFunc(matrix, coords[0], coords[1]);
+  })
+
   return count;
 }
-
-const permutations = [
-  // [0,1], 3
-  // [0,-1], 2
-  // [1,0], 1
-  // [-1,0], 2
-  [1,1],
-  // [-1,1], 4
-  [1,-1],
-  [-1,-1]
-]
 
 function countXmasFunc(matrix, deltaX, deltaY) {
   let count = 0;

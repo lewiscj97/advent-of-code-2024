@@ -11,6 +11,9 @@ const {
   _diagonalDownLeft
 } = require("./day4");
 
+const fs = require('fs');
+
+
 describe('Day 4', () => {
   describe('Matrices creation', () => {
     it('should break single line into single line matrix', () => {
@@ -112,6 +115,27 @@ describe('Day 4', () => {
     it('should calculate diagonal down left', () => {
       const expected = 1;
       const output = _diagonalDownLeft(matrix);
+
+      expect(output).to.eq(expected);
+    });
+
+    // stopped writing tests at this point, confirmed solution
+
+    it('should count total xmas from input', () => {
+      const expected = 18;
+      const output = countXmas(matrix);
+
+      expect(output).to.eq(expected);
+    });
+  });
+
+  describe('Solution', () => {
+    it('should calculate final solution', () => {
+      const input = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-4/test-input.txt').toString();
+      const matrix =  createMatrix(input);
+      const expected = 2406;
+
+      const output = countXmas(matrix);
 
       expect(output).to.eq(expected);
     });
