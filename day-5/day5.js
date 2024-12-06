@@ -1,3 +1,7 @@
+function getIncorrectlyOrderedInputs(rules, input) {
+  return input.filter((x) => !isInputOrdered(rules, x));
+}
+
 function getSumOfValidMiddlePageInputs(rules, input) {
   let sum = 0;
 
@@ -59,4 +63,10 @@ function _getMiddleValue(array) {
   return array[Math.round((array.length - 1) / 2)]
 }
 
-module.exports = { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs }
+module.exports = {
+  sanitiseRules,
+  sanitiseInput,
+  isInputOrdered,
+  getSumOfValidMiddlePageInputs,
+  getIncorrectlyOrderedInputs
+}

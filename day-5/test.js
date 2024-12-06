@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs } = require('./day5');
+const { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs, getIncorrectlyOrderedInputs} = require('./day5');
 const fs = require('fs');
 
 describe('Day 5', () => {
@@ -90,5 +90,20 @@ describe('Day 5', () => {
       const output = getSumOfValidMiddlePageInputs(sanitisedRules, sanitisedValues);
       expect(output).to.eq(expected);
     });
+  });
+
+  describe('Part 2', () => {
+    it('gets the incorrectly ordered inputs', () => {
+      const incorrectVals = [
+        [75, 97, 47, 61, 53],
+        [61, 13, 29],
+        [97, 13, 75, 29, 47]
+      ];
+
+      const output = getIncorrectlyOrderedInputs(sanitisedRules, incorrectVals);
+      expect(output).to.deep.eq(incorrectVals);
+    });
+
+
   });
 });
