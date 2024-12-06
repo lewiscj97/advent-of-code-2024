@@ -1,5 +1,25 @@
 function countMasses(matrix) {
+  let count = 0;
 
+  matrix.forEach((row, x) => {
+    row.forEach((val, y) => {
+      if (val === 'A') {
+        const br = matrix[x+1]?.[y+1];
+        const bl = matrix[x+1]?.[y-1];
+        const tr = matrix[x-1]?.[y+1];
+        const tl = matrix[x-1]?.[y-1];
+        const tlbr = [tl, 'A', br].sort().join('');
+        const trbl = [tr, 'A', bl].sort().join('');
+
+        const AMS = 'AMS';
+        if (tlbr === AMS && trbl === AMS) {
+          count += 1;
+        }
+      }
+    });
+  });
+
+  return count;
 }
 
 function countXmas(matrix) {
