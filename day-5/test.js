@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 const { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs } = require('./day5');
+const fs = require('fs');
 
 describe('Day 5', () => {
   const sanitisedRules = [
@@ -74,6 +75,19 @@ describe('Day 5', () => {
       const expected = 143;
       const output = getSumOfValidMiddlePageInputs(sanitisedRules, sanitisedInput);
 
+      expect(output).to.eq(expected);
+    });
+
+    it('returns final solution', () => {
+      const rules = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-5/inputs/rules.txt').toString();
+      const values = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-5/inputs/values.txt').toString();
+
+      const sanitisedRules = sanitiseRules(rules);
+      const sanitisedValues = sanitiseInput(values);
+
+      const expected = 3608;
+
+      const output = getSumOfValidMiddlePageInputs(sanitisedRules, sanitisedValues);
       expect(output).to.eq(expected);
     });
   });
