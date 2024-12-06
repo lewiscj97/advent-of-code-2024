@@ -3,7 +3,7 @@ function getSumOfValidMiddlePageInputs(rules, input) {
 
   const validValues = input.filter((x) => isInputOrdered(rules, x));
   validValues.forEach((val) => {
-    sum += val[Math.round((val.length - 1) / 2)];
+    sum += _getMiddleValue(val);
   });
 
   return sum;
@@ -12,18 +12,10 @@ function getSumOfValidMiddlePageInputs(rules, input) {
 function isInputOrdered(rules, input) {
   let valid = true;
 
-  input.forEach((value, x) => {
-    // get rules that apply to the value
-    const applicableRules = [];
-    rules.forEach((rule) => {
-      if (rule.includes(value)) {
-        applicableRules.push(rule);
-      }
-    });
-
+  input.forEach((value) => {
     // go through the rules and check if other values are contained
     const relatedRules = [];
-    applicableRules.forEach((rule) => {
+    rules.forEach((rule) => {
       const otherVal = rule.find((val) => val !== value);
       if (input.includes(otherVal)) {
         relatedRules.push(rule);
@@ -31,21 +23,12 @@ function isInputOrdered(rules, input) {
     });
 
     relatedRules.forEach((rule) => {
-      let otherVal;
-
-      if (rule[0] === value) {
-        otherVal = rule[1];
-        if (input.indexOf(otherVal) < input.indexOf(value)) {
-          valid = false;
-          return;
-        }
+      if (rule[0] === value && input.indexOf(rule[1]) < input.indexOf(value)) {
+        valid = false;
       }
 
-      if (rule[1] === value) {
-        otherVal = rule[0];
-        if (input.indexOf(otherVal) > input.indexOf(value)) {
-          valid = false;
-        }
+      if (rule[1] === value && input.indexOf(rule[0]) > input.indexOf(value)) {
+        valid = false;
       }
     });
   });
@@ -70,6 +53,10 @@ function sanitiseRules(rules) {
     sanitisedRules.push([parseInt(splitRow[0]), parseInt(splitRow[1])])
   });
   return sanitisedRules;
+}
+
+function _getMiddleValue(array) {
+  return array[Math.round((array.length - 1) / 2)]
 }
 
 module.exports = { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs }
