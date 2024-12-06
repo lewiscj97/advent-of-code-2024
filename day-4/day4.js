@@ -3,12 +3,12 @@ function countXmas(matrix) {
   return count;
 }
 
-function _reverseVertical(matrix) {
+function countXmasFunc(matrix, deltaX, deltaY) {
   let count = 0;
   matrix.forEach((row, x) => {
     row.forEach((val, y) => {
       if (val === 'X') {
-        if ('X' + matrix[x-1]?.[y] + matrix[x-2]?.[y] + matrix[x-3]?.[y] === 'XMAS') {
+        if ('X' + matrix[x + deltaX]?.[y + deltaY] + matrix[x + deltaX*2]?.[y + deltaY*2] + matrix[x + deltaX*3]?.[y+deltaY*3] === 'XMAS') {
           count += 1;
         }
       }
@@ -16,51 +16,26 @@ function _reverseVertical(matrix) {
   });
 
   return count;
+}
+
+function _diagonalRight(matrix) {
+  return countXmasFunc(matrix, 1, 1);
+}
+
+function _reverseVertical(matrix) {
+  return countXmasFunc(matrix, -1, 0);
 }
 
 function _reverseHorizontal(matrix) {
-  let count = 0;
-  matrix.forEach((row, x) => {
-    row.forEach((val, y) => {
-      if (val === 'X') {
-        if ('X' + matrix[x]?.[y-1] + matrix[x]?.[y-2] + matrix[x]?.[y-3] === 'XMAS') {
-          count += 1;
-        }
-      }
-    })
-  });
-
-  return count;
+  return countXmasFunc(matrix, 0, -1);
 }
 
 function _inVerticalLine(matrix) {
-  let count = 0;
-  matrix.forEach((row, x) => {
-    row.forEach((val, y) => {
-      if (val === 'X') {
-        if ('X' + matrix[x+1]?.[y] + matrix[x+2]?.[y] + matrix[x+3]?.[y] === 'XMAS') {
-          count += 1;
-        }
-      }
-    });
-  });
-
-  return count;
+  return countXmasFunc(matrix, 1, 0);
 }
 
 function _inHorizontalLine(matrix) {
-  let count = 0;
-  matrix.forEach((row, x) => {
-    row.forEach((val, y) => {
-      if (val === 'X') {
-        if ('X' + matrix[x][y+1] + matrix[x][y+2] + matrix[x][y+3] === 'XMAS') {
-          count += 1;
-        }
-      }
-    });
-  });
-
-  return count;
+  return countXmasFunc(matrix, 0, 1);
 }
 
 function createMatrix(input) {
@@ -74,4 +49,4 @@ function createMatrix(input) {
   return matrix;
 }
 
-module.exports = { createMatrix, countXmas, _inVerticalLine, _inHorizontalLine, _reverseHorizontal, _reverseVertical }
+module.exports = { createMatrix, countXmas: countXmasFunc, _inVerticalLine, _inHorizontalLine, _reverseHorizontal, _reverseVertical }
