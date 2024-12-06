@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { sanitiseRules, sanitiseInput, isInputOrdered } = require('./day5');
+const { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs } = require('./day5');
 
 describe('Day 5', () => {
   const sanitisedRules = [
@@ -68,6 +68,13 @@ describe('Day 5', () => {
         const output = isInputOrdered(sanitisedRules, input);
         expect(output).to.be.false;
       });
+    });
+
+    it('returns sum of middle pages for all valid inputs', () => {
+      const expected = 143;
+      const output = getSumOfValidMiddlePageInputs(sanitisedRules, sanitisedInput);
+
+      expect(output).to.eq(expected);
     });
   });
 });

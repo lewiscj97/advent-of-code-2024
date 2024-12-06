@@ -1,3 +1,14 @@
+function getSumOfValidMiddlePageInputs(rules, input) {
+  let sum = 0;
+
+  const validValues = input.filter((x) => isInputOrdered(rules, x));
+  validValues.forEach((val) => {
+    sum += val[Math.round((val.length - 1) / 2)];
+  });
+
+  return sum;
+}
+
 function isInputOrdered(rules, input) {
   let valid = true;
 
@@ -61,4 +72,4 @@ function sanitiseRules(rules) {
   return sanitisedRules;
 }
 
-module.exports = { sanitiseRules, sanitiseInput, isInputOrdered }
+module.exports = { sanitiseRules, sanitiseInput, isInputOrdered, getSumOfValidMiddlePageInputs }
