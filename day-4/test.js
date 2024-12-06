@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { createMatrix, countXmas, _inVerticalLine, _inHorizontalLine, _reverseHorizontal } = require("./day4");
+const { createMatrix, countXmas, _inVerticalLine, _inHorizontalLine, _reverseHorizontal, _reverseVertical } = require("./day4");
 
 describe('Day 4', () => {
   describe('Matrices creation', () => {
@@ -74,6 +74,13 @@ describe('Day 4', () => {
     it('should identify xmas reverse horizontal', () => {
       const expected = 2;
       const output = _reverseHorizontal(matrix);
+
+      expect(output).to.eq(expected);
+    });
+
+    it('should identify xmas reverse vertical', () => {
+      const expected = 2;
+      const output = _reverseVertical(matrix);
 
       expect(output).to.eq(expected);
     });
