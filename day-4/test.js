@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { createMatrix, countXmas } = require("./day4");
+const { createMatrix, countXmas, _inVerticalLine, _inHorizontalLine } = require("./day4");
 
 describe('Day 4', () => {
   describe('Matrices creation', () => {
@@ -59,7 +59,14 @@ describe('Day 4', () => {
 
     it('should identify xmas in a line', () => {
       const expected = 3;
-      const output = countXmas(matrix);
+      const output = _inHorizontalLine(matrix);
+
+      expect(output).to.eq(expected);
+    });
+
+    it('should identify xmas vertically', () => {
+      const expected = 1;
+      const output = _inVerticalLine(matrix);
 
       expect(output).to.eq(expected);
     });
