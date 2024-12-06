@@ -2,13 +2,6 @@ const expect = require('chai').expect;
 const {
   createMatrix,
   countXmas,
-  _inVerticalLine,
-  _inHorizontalLine,
-  _reverseHorizontal,
-  _reverseVertical,
-  _diagonalUpRight,
-  _diagonalUpLeft,
-  _diagonalDownLeft
 } = require("./day4");
 
 const fs = require('fs');
@@ -69,57 +62,6 @@ describe('Day 4', () => {
       ['M', 'A', 'M', 'M', 'M', 'X', 'M', 'M', 'M', 'M'],
       ['M', 'X', 'M', 'X', 'A', 'X', 'M', 'A', 'S', 'X']
     ]
-
-    it('should identify xmas in a line', () => {
-      const expected = 3;
-      const output = _inHorizontalLine(matrix);
-
-      expect(output).to.eq(expected);
-    });
-
-    it('should identify xmas vertically', () => {
-      const expected = 1;
-      const output = _inVerticalLine(matrix);
-
-      expect(output).to.eq(expected);
-    });
-
-    it('should identify xmas reverse horizontal', () => {
-      const expected = 2;
-      const output = _reverseHorizontal(matrix);
-
-      expect(output).to.eq(expected);
-    });
-
-    it('should identify xmas reverse vertical', () => {
-      const expected = 2;
-      const output = _reverseVertical(matrix);
-
-      expect(output).to.eq(expected);
-    });
-
-    it('should calculate diagonal up right', () => {
-      const expected = 4;
-      const output = _diagonalUpRight(matrix);
-
-      expect(output).to.eq(expected);
-    });
-
-    it('should calculate diagonal up left', () => {
-      const expected = 4;
-      const output = _diagonalUpLeft(matrix);
-
-      expect(output).to.eq(expected);
-    });
-
-    it('should calculate diagonal down left', () => {
-      const expected = 1;
-      const output = _diagonalDownLeft(matrix);
-
-      expect(output).to.eq(expected);
-    });
-
-    // stopped writing tests at this point, confirmed solution
 
     it('should count total xmas from input', () => {
       const expected = 18;

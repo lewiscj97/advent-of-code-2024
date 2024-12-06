@@ -33,34 +33,6 @@ function countXmasFunc(matrix, deltaX, deltaY) {
   return count;
 }
 
-function _diagonalDownLeft(matrix){
-  return countXmasFunc(matrix, 1, 1);
-}
-
-function _diagonalUpLeft(matrix) {
-  return countXmasFunc(matrix, -1, -1);
-}
-
-function _diagonalUpRight(matrix) {
-  return countXmasFunc(matrix, -1, 1);
-}
-
-function _reverseVertical(matrix) {
-  return countXmasFunc(matrix, -1, 0);
-}
-
-function _reverseHorizontal(matrix) {
-  return countXmasFunc(matrix, 0, -1);
-}
-
-function _inVerticalLine(matrix) {
-  return countXmasFunc(matrix, 1, 0);
-}
-
-function _inHorizontalLine(matrix) {
-  return countXmasFunc(matrix, 0, 1);
-}
-
 function createMatrix(input) {
   const split = input.split('\n');
   const matrix = [];
@@ -75,11 +47,4 @@ function createMatrix(input) {
 module.exports = {
   createMatrix,
   countXmas,
-  _inVerticalLine,
-  _inHorizontalLine,
-  _reverseHorizontal,
-  _reverseVertical,
-  _diagonalUpRight,
-  _diagonalUpLeft,
-  _diagonalDownLeft
 }
