@@ -1,3 +1,7 @@
+function countMasses(matrix) {
+
+}
+
 function countXmas(matrix) {
   let count = 0;
   const permutations = [
@@ -47,4 +51,5 @@ function createMatrix(input) {
 module.exports = {
   createMatrix,
   countXmas,
+  countMasses
 }
