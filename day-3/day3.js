@@ -1,4 +1,9 @@
 const regex = /mul\([0-9]{1,3},[0-9]{1,3}\)/g
+const enhancedRegex = /(mul\([0-9]{1,3},[0-9]{1,3}\))|(do\(\)|(don't\(\)))/g
+
+function extractEnhancedCommands(input) {
+  return input.match(enhancedRegex);
+}
 
 function calculateTotalOfMulCommands(input) {
   const initialVal = 0;
@@ -15,4 +20,4 @@ function extractCommands(input) {
   return input.match(regex);
 }
 
-module.exports = { extractCommands, calculateMulCommand, calculateTotalOfMulCommands }
+module.exports = { extractCommands, calculateMulCommand, calculateTotalOfMulCommands, extractEnhancedCommands }
