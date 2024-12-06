@@ -1,5 +1,20 @@
 function countXmas(matrix) {
-  const count = _inVerticalLine(matrix) + _inHorizontalLine(matrix);
+  const count = _inVerticalLine(matrix) + _inHorizontalLine(matrix) + _reverseHorizontal(matrix);
+  return count;
+}
+
+function _reverseHorizontal(matrix) {
+  let count = 0;
+  matrix.forEach((row, x) => {
+    row.forEach((val, y) => {
+      if (val === 'X') {
+        if ('X' + matrix[x]?.[y-1] + matrix[x]?.[y-2] + matrix[x]?.[y-3] === 'XMAS') {
+          count += 1;
+        }
+      }
+    })
+  });
+
   return count;
 }
 
@@ -45,4 +60,4 @@ function createMatrix(input) {
   return matrix;
 }
 
-module.exports = { createMatrix, countXmas, _inVerticalLine, _inHorizontalLine }
+module.exports = { createMatrix, countXmas, _inVerticalLine, _inHorizontalLine, _reverseHorizontal }
