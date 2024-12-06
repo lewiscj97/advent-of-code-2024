@@ -3,6 +3,17 @@ function countXmas(matrix) {
   return count;
 }
 
+const permutations = [
+  // [0,1], 3
+  // [0,-1], 2
+  // [1,0], 1
+  // [-1,0], 2
+  [1,1],
+  // [-1,1], 4
+  [1,-1],
+  [-1,-1]
+]
+
 function countXmasFunc(matrix, deltaX, deltaY) {
   let count = 0;
   matrix.forEach((row, x) => {
@@ -18,8 +29,16 @@ function countXmasFunc(matrix, deltaX, deltaY) {
   return count;
 }
 
-function _diagonalRight(matrix) {
+function _diagonalDownLeft(matrix){
   return countXmasFunc(matrix, 1, 1);
+}
+
+function _diagonalUpLeft(matrix) {
+  return countXmasFunc(matrix, -1, -1);
+}
+
+function _diagonalUpRight(matrix) {
+  return countXmasFunc(matrix, -1, 1);
 }
 
 function _reverseVertical(matrix) {
@@ -49,4 +68,14 @@ function createMatrix(input) {
   return matrix;
 }
 
-module.exports = { createMatrix, countXmas: countXmasFunc, _inVerticalLine, _inHorizontalLine, _reverseHorizontal, _reverseVertical }
+module.exports = {
+  createMatrix,
+  countXmas,
+  _inVerticalLine,
+  _inHorizontalLine,
+  _reverseHorizontal,
+  _reverseVertical,
+  _diagonalUpRight,
+  _diagonalUpLeft,
+  _diagonalDownLeft
+}

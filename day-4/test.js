@@ -1,5 +1,15 @@
 const expect = require('chai').expect;
-const { createMatrix, countXmas, _inVerticalLine, _inHorizontalLine, _reverseHorizontal, _reverseVertical } = require("./day4");
+const {
+  createMatrix,
+  countXmas,
+  _inVerticalLine,
+  _inHorizontalLine,
+  _reverseHorizontal,
+  _reverseVertical,
+  _diagonalUpRight,
+  _diagonalUpLeft,
+  _diagonalDownLeft
+} = require("./day4");
 
 describe('Day 4', () => {
   describe('Matrices creation', () => {
@@ -84,5 +94,26 @@ describe('Day 4', () => {
 
       expect(output).to.eq(expected);
     });
-  })
+
+    it('should calculate diagonal up right', () => {
+      const expected = 4;
+      const output = _diagonalUpRight(matrix);
+
+      expect(output).to.eq(expected);
+    });
+
+    it('should calculate diagonal up left', () => {
+      const expected = 4;
+      const output = _diagonalUpLeft(matrix);
+
+      expect(output).to.eq(expected);
+    });
+
+    it('should calculate diagonal down left', () => {
+      const expected = 1;
+      const output = _diagonalDownLeft(matrix);
+
+      expect(output).to.eq(expected);
+    });
+  });
 });
