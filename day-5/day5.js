@@ -1,5 +1,45 @@
-function isInputOrdered(sanitisedRules, input) {
-  return true;
+function isInputOrdered(rules, input) {
+  let valid = true;
+
+  input.forEach((value, x) => {
+    // get rules that apply to the value
+    const applicableRules = [];
+    rules.forEach((rule) => {
+      if (rule.includes(value)) {
+        applicableRules.push(rule);
+      }
+    });
+
+    // go through the rules and check if other values are contained
+    const relatedRules = [];
+    applicableRules.forEach((rule) => {
+      const otherVal = rule.find((val) => val !== value);
+      if (input.includes(otherVal)) {
+        relatedRules.push(rule);
+      }
+    });
+
+    relatedRules.forEach((rule) => {
+      let otherVal;
+
+      if (rule[0] === value) {
+        otherVal = rule[1];
+        if (input.indexOf(otherVal) < input.indexOf(value)) {
+          valid = false;
+          return;
+        }
+      }
+
+      if (rule[1] === value) {
+        otherVal = rule[0];
+        if (input.indexOf(otherVal) > input.indexOf(value)) {
+          valid = false;
+        }
+      }
+    });
+  });
+
+  return valid;
 }
 
 function sanitiseInput(input) {

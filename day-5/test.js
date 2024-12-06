@@ -44,10 +44,30 @@ describe('Day 5', () => {
 
   describe('Solution', () => {
     it('returns true if solution is correct', () => {
-      const input = [75, 47, 61, 53, 29];
-      const output = isInputOrdered(sanitisedRules, input);
+      const correctVals = [
+        [75, 47, 61, 53, 29],
+        [97, 61, 53, 29, 13],
+        [75, 29, 13],
+      ];
 
-      expect(output).to.be.true;
+      correctVals.forEach((input) => {
+        const output = isInputOrdered(sanitisedRules, input);
+
+        expect(output).to.be.true;
+      });
+    });
+
+    it('returns false if solution is incorrect', () => {
+      const incorrectVals = [
+        [75, 97, 47, 61, 53],
+        [61, 13, 29],
+        [97, 13, 75, 29, 47]
+      ];
+
+      incorrectVals.forEach((input) => {
+        const output = isInputOrdered(sanitisedRules, input);
+        expect(output).to.be.false;
+      });
     });
   });
 });
