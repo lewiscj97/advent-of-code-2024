@@ -36,7 +36,7 @@ describe('Day 2', () => {
   });
 
   describe('Unhappy paths', () => {
-    const unhappyTests = [,
+    const unhappyTests = [
       "9 7 6 2 1",
       "1 2 7 8 9"
     ];
@@ -68,11 +68,14 @@ describe('Day 2', () => {
     it('Passes when removing one bad level', () => {
       const input = "1 3 2 4 5";
       const input2 = "8 6 4 4 1";
-      const input3 = "6 7 10 16 13";
 
       expect(validateReport(input)).to.be.true;
       expect(validateReport(input2)).to.be.true;
-      expect(validateReport(input3)).to.be.true; // failing
+    });
+
+    it('failing', () => {
+      const input = "6 7 10 16 13";
+      expect(validateReport(input)).to.be.true; // failing
     });
   });
 });
