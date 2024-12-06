@@ -4,6 +4,8 @@ function countMasses(matrix) {
   matrix.forEach((row, x) => {
     row.forEach((val, y) => {
       if (val === 'A') {
+        // No point in refactoring
+        // this is clearer than making a single line
         const br = matrix[x+1]?.[y+1];
         const bl = matrix[x+1]?.[y-1];
         const tr = matrix[x-1]?.[y+1];
