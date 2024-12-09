@@ -42,7 +42,29 @@ function navigateMatrix(matrix) {
 }
 
 function moveGuard(matrix, currentLocation) {
-  const {location: [x, y], direction} = currentLocation;
+  let { location: [x, y], direction } = currentLocation;
+
+  const nextLocation = identifyNextLocation(matrix, currentLocation);
+
+  if (nextLocation === '#') {
+    switch (direction) {
+      case 'UP':
+        direction = 'RIGHT'
+        break;
+      case 'RIGHT':
+        direction = 'DOWN'
+        break;
+      case 'DOWN':
+        direction = 'LEFT'
+        break;
+      case 'LEFT':
+        direction = 'UP'
+        break;
+      default:
+        direction = null
+    }
+  }
+
   const [deltaX, deltaY] = MOVE_DELTAS[direction];
 
   const newX = x + deltaX;

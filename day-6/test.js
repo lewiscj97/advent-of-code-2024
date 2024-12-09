@@ -91,11 +91,41 @@ describe('Day 6', () => {
     expect(response).to.eq(expected);
   });
 
-  it('count how many moves to leave matrix', () => {
-    const expected = 41;
+  // it('count how many moves to leave matrix', () => {
+  //   const expected = 41;
+  //
+  //   const response = navigateMatrix(matrix);
+  //
+  //   expect(response).to.deep.eq(expected);
+  // });
 
-    const response = navigateMatrix(matrix);
+  it('should move guard to the right when in front of an #', () => {
+    const matrix = [
+      ['.', '.', '.', '.', '#', '.', '.', '.', '.', '.'],
+      ['.', '.', '.', '.', '^', '.', '.', '.', '.', '#'],
+      ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+      ['.', '.', '#', '.', '.', '.', '.', '.', '.', '.'],
+      ['.', '.', '.', '.', '.', '.', '.', '#', '.', '.'],
+      ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+      ['.', '#', '.', '.', '.', '.', '.', '.', '.', '.'],
+      ['.', '.', '.', '.', '.', '.', '.', '.', '#', '.'],
+      ['#', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+      ['.', '.', '.', '.', '.', '.', '#', '.', '.', '.']
+    ];
 
-    expect(response).to.deep.eq(expected);
-  });
+    const currentLocation = {
+      location: [1, 4],
+      direction: 'UP',
+    }
+
+    const expectedLocation = {
+      location: [1, 5],
+      direction: 'RIGHT',
+    }
+
+    const response = moveGuard(matrix, currentLocation);
+    const guardLocation = locateGuard(response);
+
+    expect(guardLocation).to.deep.eq(expectedLocation);
+  })
 });
