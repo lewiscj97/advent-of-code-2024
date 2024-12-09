@@ -5,19 +5,19 @@ const { DIRECTIONS, MOVE_DELTAS, DIRECTIONS_INVERSE } = require('./constants');
 
 function navigateMatrix(matrix) {
   let x = true;
-  let count = 0;
+  const positionsVisited = [];
 
   while (x === true) {
     const currentLocation = locateGuard(matrix);
+    positionsVisited.push(currentLocation.location);
     if (identifyNextLocation(matrix, currentLocation) === null) {
       x = false;
     } else {
       moveGuard(matrix, currentLocation);
-      count++;
     }
   }
 
-  return count;
+  return new Set(positionsVisited.map(JSON.stringify)).size;
 }
 
 function moveGuard(matrix, currentLocation) {
