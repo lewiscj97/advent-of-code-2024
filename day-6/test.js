@@ -1,4 +1,6 @@
 const expect = require('chai').expect;
+const fs = require('fs');
+
 const {
   createMatrix,
   locateGuard,
@@ -116,7 +118,17 @@ describe('Day 6', () => {
 
     const response = navigateMatrix(matrix);
 
-    expect(response).to.deep.eq(expected);
+    expect(response).to.eq(expected);
   });
+
+  it('calculates final solution', () => {
+    const expected = 4433;
+    const input = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-6/input.txt').toString();
+    const matrix = createMatrix(input);
+
+    const response = navigateMatrix(matrix);
+
+    expect(response).to.eq(expected)
+  })
 
 });
