@@ -1,7 +1,7 @@
 // check what is in the cell directly in the direction of the guard
 // move if they can
 
-const { DIRECTIONS, MOVE_DELTAS } = require('./constants');
+const { DIRECTIONS, MOVE_DELTAS, DIRECTIONS_INVERSE } = require('./constants');
 
 function moveGuard(matrix, currentLocation) {
   const { location: [x, y], direction } = currentLocation;
@@ -10,8 +10,8 @@ function moveGuard(matrix, currentLocation) {
   const newX = x + deltaX;
   const newY = y + deltaY;
 
-  matrix[newX][newY] = currentLocation.location;
-  matrix[x][y] = currentLocation.direction;
+  matrix[newX][newY] = DIRECTIONS_INVERSE[direction];
+  matrix[x][y] = ".";
 
   return matrix;
 }

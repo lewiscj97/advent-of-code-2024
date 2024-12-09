@@ -1,3 +1,10 @@
+const DIRECTIONS_INVERSE = {
+  'UP': '^',
+  'RIGHT': '>',
+  'LEFT': '<',
+  'DOWN': 'v'
+};
+
 const DIRECTIONS = {
   '^': 'UP',
   '>': 'RIGHT',
@@ -14,5 +21,6 @@ const MOVE_DELTAS = {
 
 module.exports = {
   DIRECTIONS,
+  DIRECTIONS_INVERSE,
   MOVE_DELTAS
 }
