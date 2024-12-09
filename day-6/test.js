@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { createMatrix, locateGuard, identifyNextLocation, moveGuard } = require('./day6');
+const { createMatrix, locateGuard, identifyNextLocation, moveGuard, navigateMatrix } = require('./day6');
 
 describe('Day 6', () => {
   const input =
@@ -73,5 +73,13 @@ describe('Day 6', () => {
     const guardLocation = locateGuard(response);
 
     expect(guardLocation).to.deep.eq(expectedGuardLocation);
+  });
+
+  it('count how many moves to leave matrix', () => {
+    const expected = 41;
+
+    const response = navigateMatrix(matrix);
+
+    expect(response).to.deep.eq(expected);
   });
 });

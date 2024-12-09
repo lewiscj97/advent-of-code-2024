@@ -3,8 +3,25 @@
 
 const { DIRECTIONS, MOVE_DELTAS, DIRECTIONS_INVERSE } = require('./constants');
 
+function navigateMatrix(matrix) {
+  let x = true;
+  let count = 0;
+
+  while (x === true) {
+    const currentLocation = locateGuard(matrix);
+    const nextLocation = identifyNextLocation(matrix, currentLocation);
+    if (nextLocation === '.') {
+      moveGuard(matrix, currentLocation);
+      count++;
+    }
+    x = false; // obvs need to change
+  }
+
+  return count;
+}
+
 function moveGuard(matrix, currentLocation) {
-  const { location: [x, y], direction } = currentLocation;
+  const {location: [x, y], direction} = currentLocation;
   const [deltaX, deltaY] = MOVE_DELTAS[direction];
 
   const newX = x + deltaX;
@@ -17,7 +34,7 @@ function moveGuard(matrix, currentLocation) {
 }
 
 function identifyNextLocation(matrix, currentLocation) {
-  const { location: [x, y], direction } = currentLocation;
+  const {location: [x, y], direction} = currentLocation;
   const [deltaX, deltaY] = MOVE_DELTAS[direction];
 
   const newX = x + deltaX;
@@ -36,7 +53,7 @@ function locateGuard(matrix) {
   matrix.forEach((row, x) => {
     row.forEach((value, y) => {
       if (value !== '.' && value !== '#') {
-        location = { location: [x, y], direction: DIRECTIONS[value] }
+        location = {location: [x, y], direction: DIRECTIONS[value]}
       }
     });
   });
@@ -54,4 +71,10 @@ function createMatrix(input) {
   return matrix;
 }
 
-module.exports = { createMatrix, locateGuard, identifyNextLocation, moveGuard }
+module.exports = {
+  createMatrix,
+  locateGuard,
+  identifyNextLocation,
+  moveGuard,
+  navigateMatrix
+}
