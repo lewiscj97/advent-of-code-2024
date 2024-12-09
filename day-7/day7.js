@@ -8,21 +8,13 @@ function isOperable(input) {
   options.push(values[0] + values[1]);
   options.push(values[0] * values[1]);
 
-  // 3 vals
-  options.push(options[0] + values[2]);
-  options.push(options[0] * values[2]);
-  options.push(options[1] + values[2]);
-  options.push(options[1] * values[2]);
-
-  // 4 vals
-  options.push(options[0] + values[3]);
-  options.push(options[0] * values[3]);
-  options.push(options[1] + values[3]);
-  options.push(options[1] * values[3]);
-  options.push(options[2] + values[3]);
-  options.push(options[2] * values[3]);
-  options.push(options[3] + values[3]);
-  options.push(options[3] * values[3]);
+  for (let i = 2; i < values.length; i++) {
+    const currentOptionsLength = options.length;
+    for (let j = 0; j < currentOptionsLength; j++) {
+      options.push(options[j] + values[i]);
+      options.push(options[j] * values[i]);
+    }
+  }
 
   return options.includes(output);
 }
