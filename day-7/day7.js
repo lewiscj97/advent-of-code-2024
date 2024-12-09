@@ -1,3 +1,19 @@
+function calculateTotalOfOperableCommands(input) {
+  const allOperableCommands = input.filter((val) => isOperable(val))
+
+  const initialValue = 0;
+
+  return allOperableCommands.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.output,
+    initialValue,
+  );
+}
+
+function parseFullInput(input) {
+  const lines = input.split('\n');
+  return lines.map((line) => parseInput(line));
+}
+
 function isOperable(input) {
   const output = input.output;
   const values = input.values;
@@ -34,5 +50,7 @@ function parseInput(input) {
 
 module.exports = {
   parseInput,
-  isOperable
+  isOperable,
+  parseFullInput,
+  calculateTotalOfOperableCommands
 }

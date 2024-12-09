@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { parseInput, isOperable } = require('./day7');
+const { parseInput, isOperable, parseFullInput, calculateTotalOfOperableCommands } = require('./day7');
 
 describe('Day 7', () => {
   it('should create an object from an input', () => {
@@ -78,5 +78,25 @@ describe('Day 7', () => {
     inputs.forEach((input) => [
       expect(isOperable(input)).to.be.false
     ]);
+  });
+
+  it('should calculate total from test input', () => {
+    const input =
+      "190: 10 19\n" +
+      "3267: 81 40 27\n" +
+      "83: 17 5\n" +
+      "156: 15 6\n" +
+      "7290: 6 8 6 15\n" +
+      "161011: 16 10 13\n" +
+      "192: 17 8 14\n" +
+      "21037: 9 7 18 13\n" +
+      "292: 11 6 16 20";
+
+    const parsedInput = parseFullInput(input);
+    const expected = 3749;
+
+    const response = calculateTotalOfOperableCommands(parsedInput);
+
+    expect(response).to.eq(expected);
   });
 });
