@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 const { parseInput, isOperable, parseFullInput, calculateTotalOfOperableCommands } = require('./day7');
+const fs = require('fs');
 
 describe('Day 7', () => {
   it('should create an object from an input', () => {
@@ -94,6 +95,17 @@ describe('Day 7', () => {
 
     const parsedInput = parseFullInput(input);
     const expected = 3749;
+
+    const response = calculateTotalOfOperableCommands(parsedInput);
+
+    expect(response).to.eq(expected);
+  });
+
+  it('should calculate the final solution', () => {
+    const input = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-7/input.txt').toString();
+    const expected = 2437272289165;
+
+    const parsedInput = parseFullInput(input);
 
     const response = calculateTotalOfOperableCommands(parsedInput);
 
