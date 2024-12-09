@@ -2,22 +2,29 @@ function isOperable(input) {
   const output = input.output;
   const values = input.values;
 
-  let total;
-  let operable = false;
+  let options = [];
 
-  total = values[0] + values[1];
+  // 2 vals
+  options.push(values[0] + values[1]);
+  options.push(values[0] * values[1]);
 
-  if (total === output) {
-    return true;
-  }
+  // 3 vals
+  options.push(options[0] + values[2]);
+  options.push(options[0] * values[2]);
+  options.push(options[1] + values[2]);
+  options.push(options[1] * values[2]);
 
-  total = values[0] * values[1];
+  // 4 vals
+  options.push(options[0] + values[3]);
+  options.push(options[0] * values[3]);
+  options.push(options[1] + values[3]);
+  options.push(options[1] * values[3]);
+  options.push(options[2] + values[3]);
+  options.push(options[2] * values[3]);
+  options.push(options[3] + values[3]);
+  options.push(options[3] * values[3]);
 
-  if (total === output) {
-    return true;
-  }
-
-  return operable;
+  return options.includes(output);
 }
 
 function parseInput(input) {

@@ -35,4 +35,15 @@ describe('Day 7', () => {
 
     expect(response).to.be.true;
   });
+
+  it('should return true, 4 values', () => {
+    const input = {
+      output: 292,
+      values: [11, 6, 16, 20],
+    };
+
+    const response = isOperable(input);
+
+    expect(response).to.be.true;
+  });
 });
