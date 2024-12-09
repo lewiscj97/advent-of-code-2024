@@ -1,5 +1,12 @@
 const expect = require('chai').expect;
-const { createMatrix, locateGuard, identifyNextLocation, moveGuard, navigateMatrix } = require('./day6');
+const {
+  createMatrix,
+  locateGuard,
+  identifyNextLocation,
+  moveGuard,
+  navigateMatrix,
+  whatIsNewDirection
+} = require('./day6');
 
 describe('Day 6', () => {
   const input =
@@ -73,6 +80,15 @@ describe('Day 6', () => {
     const guardLocation = locateGuard(response);
 
     expect(guardLocation).to.deep.eq(expectedGuardLocation);
+  });
+
+  it('returns next direction based on current direction', () => {
+    const direction = 'UP';
+    const expected = 'RIGHT';
+
+    const response = whatIsNewDirection(direction);
+
+    expect(response).to.eq(expected);
   });
 
   it('count how many moves to leave matrix', () => {

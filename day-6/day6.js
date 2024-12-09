@@ -3,6 +3,27 @@
 
 const { DIRECTIONS, MOVE_DELTAS, DIRECTIONS_INVERSE } = require('./constants');
 
+function whatIsNewDirection(currentDirection) {
+  let direction;
+  switch (currentDirection) {
+    case 'UP':
+      direction = 'RIGHT'
+      break;
+    case 'RIGHT':
+      direction = 'DOWN'
+      break;
+    case 'DOWN':
+      direction = 'LEFT'
+      break;
+    case 'LEFT':
+      direction = 'UP'
+      break;
+    default:
+      direction = null
+  }
+  return direction;
+}
+
 function navigateMatrix(matrix) {
   let x = true;
   let count = 0;
@@ -76,5 +97,6 @@ module.exports = {
   locateGuard,
   identifyNextLocation,
   moveGuard,
+  whatIsNewDirection,
   navigateMatrix
 }
