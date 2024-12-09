@@ -5,7 +5,6 @@ const {
   identifyNextLocation,
   moveGuard,
   navigateMatrix,
-  whatIsNewDirection
 } = require('./day6');
 
 describe('Day 6', () => {
@@ -82,23 +81,6 @@ describe('Day 6', () => {
     expect(guardLocation).to.deep.eq(expectedGuardLocation);
   });
 
-  it('returns next direction based on current direction', () => {
-    const direction = 'UP';
-    const expected = 'RIGHT';
-
-    const response = whatIsNewDirection(direction);
-
-    expect(response).to.eq(expected);
-  });
-
-  // it('count how many moves to leave matrix', () => {
-  //   const expected = 41;
-  //
-  //   const response = navigateMatrix(matrix);
-  //
-  //   expect(response).to.deep.eq(expected);
-  // });
-
   it('should move guard to the right when in front of an #', () => {
     const matrix = [
       ['.', '.', '.', '.', '#', '.', '.', '.', '.', '.'],
@@ -128,4 +110,13 @@ describe('Day 6', () => {
 
     expect(guardLocation).to.deep.eq(expectedLocation);
   })
+
+  it('count how many moves to leave matrix', () => {
+    const expected = 41;
+
+    const response = navigateMatrix(matrix);
+
+    expect(response).to.deep.eq(expected);
+  });
+
 });
