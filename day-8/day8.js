@@ -4,13 +4,8 @@ function identifyAntennas(matrix) {
   matrix.forEach((row, x) => {
     row.forEach((val, y) => {
       if (val !== '.') {
-        if (objects[val] === undefined) {
-          objects[val] = [[x, y]];
-        } else {
-          const tempArr = objects[val];
-          tempArr.push([x, y]);
-          objects[val] = tempArr;
-        }
+        objects[val] = objects[val] || [];
+        objects[val].push([x, y]);
       }
     });
   });
