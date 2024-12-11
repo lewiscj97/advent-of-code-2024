@@ -23,8 +23,6 @@ function optimiseFileArray(input) {
       }
       fileArray[firstEmptyIndex] = val;
       fileArray[fileArray.length + i] = '.';
-    } else {
-
     }
   }
 
