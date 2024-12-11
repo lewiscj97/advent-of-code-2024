@@ -1,11 +1,29 @@
 const { createMatrix } = require("../day-4/day4");
 
+function findAntenodesNewRules(input, matrixSize) {
+  const delta = [input[1][0] - input[0][0], input[1][1] - input[0][1]];
+
+  const xValues = [];
+  const yValues = [];
+
+  for (let i = 0; input[0][0] - delta[0]*i >= 0; i++) {
+    xValues.push([input[0][0] - delta[0]*i, input[0][1] - delta[1]*i]);
+  }
+
+  for (let j = 0; input[1][1] + delta[1]*j <= matrixSize; j++) {
+    yValues.push([input[1][0] + delta[0]*j, input[1][1] + delta[1]*j])
+  }
+
+  const antenodes = xValues.concat(yValues);
+
+  return antenodes.sort();
+}
+
 function findAntenodesSolution(input) {
   const matrix = createMatrix(input);
   const matrixSize = matrix[0].length - 1;
   const antennas = identifyAntennas(matrix);
   const values = Object.values(antennas);
-
 
   const antenodes = values.map((vals) => calculateAllAntenodes(vals, matrixSize)).flat();
 
@@ -62,5 +80,6 @@ module.exports = {
   identifyAntennas,
   calculateAntenodes,
   calculateAllAntenodes,
-  findAntenodesSolution
+  findAntenodesSolution,
+  findAntenodesNewRules
 }
