@@ -2,9 +2,11 @@ function optimiseFileArrayNoFragmentation(input) {
   const fileArray = createFileArray(input);
   let fileId = parseInt(fileArray.at(-1));
 
+  console.log(fileArray.toString());
+
   const intFileArray = fileArray.map(Number)
 
-  for (fileId; fileId >= 0; fileId--) {
+  for (fileId; fileId > 0; fileId--) {
     const indexesOfId = [];
     for (let j = 0; j < intFileArray.length; j++) {
       if (intFileArray[j] === fileId) {
@@ -12,7 +14,7 @@ function optimiseFileArrayNoFragmentation(input) {
       }
     }
 
-    let indexes = [];
+    let blocksOfEmptySpace = [];
 
     let i = 0;
 
@@ -23,12 +25,34 @@ function optimiseFileArrayNoFragmentation(input) {
           intermediateArr.push(i);
           i++;
         }
-        indexes.push(intermediateArr);
+        blocksOfEmptySpace.push(intermediateArr);
       } else {
         i++;
       }
     }
+
+    let keepAdding = true;
+
+    let x = 0;
+    while (keepAdding) {
+      const block = blocksOfEmptySpace[x];
+      if (block.length >= indexesOfId.length) {
+        for (let i = 0; i < indexesOfId.length; i++) {
+          if (indexesOfId[i] > block[i]) {
+            fileArray[indexesOfId[i]] = '.';
+            fileArray[block[i]] = fileId.toString();
+          }
+        }
+        break;
+      } else {
+        x++;
+        if (x > blocksOfEmptySpace.length-1) break;
+      }
+    }
+
   }
+
+  return fileArray;
 }
 
 function calculateChecksum(input) {
