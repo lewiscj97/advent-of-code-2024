@@ -10,7 +10,7 @@ function applyRules(input) {
     return [parseInt(first), parseInt(second)];
   }
 
-  return 0;
+  return 2024 * input;
 }
 
 function parseInput(input) {

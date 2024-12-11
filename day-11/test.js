@@ -29,5 +29,14 @@ describe('Day 11', () => {
 
       expect(response).to.deep.eq(expected);
     });
+
+    it('should multiply other values by 2024', () => {
+      const input = 999;
+      const expected = 2021976;
+
+      const response = applyRules(input);
+
+      expect(response).to.eq(expected);
+    });
   });
 });
