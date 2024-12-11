@@ -1,3 +1,36 @@
+function optimiseFileArrayNoFragmentation(input) {
+  const fileArray = createFileArray(input);
+  let fileId = parseInt(fileArray.at(-1));
+
+  const intFileArray = fileArray.map(Number)
+
+  for (fileId; fileId >= 0; fileId--) {
+    const indexesOfId = [];
+    for (let j = 0; j < intFileArray.length; j++) {
+      if (intFileArray[j] === fileId) {
+        indexesOfId.push(j);
+      }
+    }
+
+    let indexes = [];
+
+    let i = 0;
+
+    while (i < fileArray.length) {
+      if (fileArray[i] === '.') {
+        const intermediateArr = [];
+        while (i < fileArray.length && fileArray[i] === '.') {
+          intermediateArr.push(i);
+          i++;
+        }
+        indexes.push(intermediateArr);
+      } else {
+        i++;
+      }
+    }
+  }
+}
+
 function calculateChecksum(input) {
   const fileArray = optimiseFileArray(input).map(Number, 0);
   let checksum = 0;
@@ -53,4 +86,4 @@ function createFileArray(input) {
   return fileArray.map(String);
 }
 
-module.exports = { createFileArray, optimiseFileArray, calculateChecksum };
+module.exports = { createFileArray, optimiseFileArray, calculateChecksum, optimiseFileArrayNoFragmentation };
