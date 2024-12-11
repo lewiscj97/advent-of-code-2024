@@ -67,4 +67,17 @@ describe('Day 8', () => {
 
     expect(output).to.deep.eq(expected);
   });
+
+  it('should identify locations of nodes for a different pair of values', () => {
+    const input = [
+      [5, 6], [8, 8]
+    ];
+    const expected = [
+      [11, 10], [2, 4]
+    ];
+
+    const output = calculateAntenodes(input);
+
+    expect(output).to.deep.eq(expected);
+  });
 });
