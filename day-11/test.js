@@ -72,5 +72,17 @@ describe('Day 11', () => {
 
       expect(response).to.eq(expected);
     });
+
+    it('should calculate final solution', () => {
+      const input = '8793800 1629 65 5 960 0 138983 85629';
+      const times = 25;
+      const expected = 194557;
+
+      const responseString = blinkTimes(input, times);
+      const responseArray = parseInput(responseString);
+      const numberOfStones = responseArray.length;
+
+      expect(numberOfStones).to.eq(expected);
+    });
   });
 });
