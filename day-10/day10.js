@@ -9,15 +9,21 @@ function _traverseSingleTrailhead(matrix, trailhead) {
     [-1, 0]
   ];
 
-  let coords= deltas.filter((delta) => {
+  let coords = [];
+  const tempCoords = [];
+  deltas.forEach((delta) => {
     const x = trailhead[0] + delta[0];
     const y = trailhead[1] + delta[1];
     const value = matrix[x]?.[y]
 
     if (value === currentVal + 1 && value !== undefined) {
-      return matrix[x][y];
+      if (value + 1 === 9) {
+        count++;
+      }
+      tempCoords.push([x, y]);
     }
   });
+  coords = tempCoords;
 
   currentVal++;
 

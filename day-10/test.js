@@ -42,5 +42,23 @@ describe('Day 10', () => {
 
       expect(response).to.eq(expected);
     });
+
+    it('should count multiple paths for a single trailhead', () => {
+      const input =
+        '2220222\n' +
+        '3331333\n' +
+        '4442444\n' +
+        '6543456\n' +
+        '7111117\n' +
+        '8111118\n' +
+        '9111119'
+
+      const matrix = createMatrix(input);
+
+      const expected = 2;
+
+      const response = traverseTrailheads(matrix);
+      expect(response).to.eq(expected);
+    });
   });
 });
