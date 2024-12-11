@@ -1,5 +1,26 @@
 const { createMatrix } = require('../day-4/day4');
 
+function findAllAntenodesNewRules(input, matrixSize) {
+  const pairs = [];
+
+  // find all combinations of coordinates
+  for (let i = 0; i < input.length-1; i++) {
+    for (let j = i; j < input.length-1; j++) {
+      pairs.push([input[i], input[j+1]]);
+    }
+  }
+
+  const antenodes = [];
+
+  pairs.forEach((pair) => {
+    antenodes.push(findAntenodesNewRules(pair, matrixSize));
+  });
+
+  const flatAntenodes = antenodes.flat()
+
+  return Array.from(new Set(flatAntenodes.map(JSON.stringify)), JSON.parse);
+}
+
 function commonFunc(start, delta, multiplier, matrixSize) {
   let breaker = true;
   let i = 0;
@@ -90,4 +111,5 @@ module.exports = {
   calculateAllAntenodes,
   findAntenodesSolution,
   findAntenodesNewRules,
+  findAllAntenodesNewRules
 }
