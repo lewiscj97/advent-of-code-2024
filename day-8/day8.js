@@ -1,3 +1,10 @@
+function findAntenodesSolution(input) {
+  const values = Object.values(input);
+  const antenodes = values.map((vals) => calculateAllAntenodes(vals)).flat();
+
+  return Array.from(new Set(antenodes.map(JSON.stringify)), JSON.parse).length;
+}
+
 function calculateAllAntenodes(input) {
   const pairs = [];
 
@@ -47,5 +54,6 @@ function identifyAntennas(matrix) {
 module.exports = {
   identifyAntennas,
   calculateAntenodes,
-  calculateAllAntenodes
+  calculateAllAntenodes,
+  findAntenodesSolution
 }

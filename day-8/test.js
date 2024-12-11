@@ -2,7 +2,8 @@ const { createMatrix } = require("../day-4/day4");
 const {
   identifyAntennas,
   calculateAntenodes,
-  calculateAllAntenodes
+  calculateAllAntenodes,
+  findAntenodesSolution
 } = require('./day8');
 const expect = require('chai').expect;
 
@@ -107,5 +108,22 @@ describe('Day 8', () => {
     const output = calculateAllAntenodes(input);
 
     expect(output).to.have.deep.members(expected.sort());
+  });
+
+  it('should calculate test result correctly', () => {
+    const input = {
+      '0': [
+        [1, 8], [2, 5], [3, 7], [4, 4]
+      ],
+      'A': [
+        [5, 6], [8, 8], [9, 9]
+      ]
+    };
+
+    const expected = 14;
+
+    const output = findAntenodesSolution(input);
+
+    expect(output).to.eq(expected);
   });
 });
