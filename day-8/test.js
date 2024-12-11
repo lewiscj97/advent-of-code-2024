@@ -5,6 +5,7 @@ const {
   calculateAllAntenodes,
   findAntenodesSolution
 } = require('./day8');
+const fs = require('fs');
 const expect = require('chai').expect;
 
 describe('Day 8', () => {
@@ -65,7 +66,7 @@ describe('Day 8', () => {
       [0, 11], [3, 2]
     ];
 
-    const output = calculateAntenodes(input);
+    const output = calculateAntenodes(input, 11);
 
     expect(output).to.deep.eq(expected);
   });
@@ -78,7 +79,7 @@ describe('Day 8', () => {
       [11, 10], [2, 4]
     ];
 
-    const output = calculateAntenodes(input);
+    const output = calculateAntenodes(input, 11);
 
     expect(output).to.deep.eq(expected);
   });
@@ -91,7 +92,7 @@ describe('Day 8', () => {
       [0, 7]
     ];
 
-    const output = calculateAntenodes(input);
+    const output = calculateAntenodes(input, 11);
 
     expect(output[0]).to.have.members(expected[0]);
   });
@@ -122,8 +123,19 @@ describe('Day 8', () => {
 
     const expected = 14;
 
-    const output = findAntenodesSolution(input);
+    const output = findAntenodesSolution(input, matrix[0].length-1);
 
+    expect(output).to.eq(expected);
+  });
+
+  it('should calculate final solution', () => {
+    const input = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-8/input.txt').toString();
+    const matrix = createMatrix(input);
+    const antennas = identifyAntennas(matrix);
+
+    const expected = 259;
+
+    const output = findAntenodesSolution(antennas, matrix[0].length-1);
     expect(output).to.eq(expected);
   });
 });

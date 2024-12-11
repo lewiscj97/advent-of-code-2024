@@ -1,11 +1,11 @@
-function findAntenodesSolution(input) {
+function findAntenodesSolution(input, matrixLength) {
   const values = Object.values(input);
-  const antenodes = values.map((vals) => calculateAllAntenodes(vals)).flat();
+  const antenodes = values.map((vals) => calculateAllAntenodes(vals, matrixLength)).flat();
 
   return Array.from(new Set(antenodes.map(JSON.stringify)), JSON.parse).length;
 }
 
-function calculateAllAntenodes(input) {
+function calculateAllAntenodes(input, matrixLength) {
   const pairs = [];
 
   // find all combinations of coordinates
@@ -18,20 +18,20 @@ function calculateAllAntenodes(input) {
   const antendodes = [];
 
   pairs.forEach((pair) => {
-    antendodes.push(calculateAntenodes(pair));
+    antendodes.push(calculateAntenodes(pair, matrixLength));
   });
 
   return antendodes.flat().sort();
 }
 
-function calculateAntenodes(input) {
+function calculateAntenodes(input, matrixSize) {
   const delta = [input[1][0] - input[0][0], input[1][1] - input[0][1]];
   const antenodes = [];
 
   antenodes.push([input[0][0] - delta[0], input[0][1] - delta[1]]);
   antenodes.push([input[1][0] + delta[0], input[1][1] + delta[1]]);
 
-  const correctAntenodes = antenodes.filter((val) => val[0] >= 0 && val[1] >= 0 && val[0] <= 11 && val[1] <= 11);
+  const correctAntenodes = antenodes.filter((val) => val[0] >= 0 && val[1] >= 0 && val[0] <= matrixSize && val[1] <= matrixSize);
 
   return correctAntenodes.sort();
 }
