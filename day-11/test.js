@@ -20,5 +20,14 @@ describe('Day 11', () => {
 
       expect(response).to.eq(expected);
     });
+
+    it('should split numbers with even digits into two values', () => {
+      const input = 99;
+      const expected = [9, 9];
+
+      const response = applyRules(input);
+
+      expect(response).to.deep.eq(expected);
+    });
   });
 });
