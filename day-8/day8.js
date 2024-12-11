@@ -5,7 +5,9 @@ function calculateAntenodes(input) {
   antenodes.push([input[0][0] - delta[0], input[0][1] - delta[1]]);
   antenodes.push([input[1][0] + delta[0], input[1][1] + delta[1]]);
 
-  return antenodes.sort();
+  const correctAntenodes = antenodes.filter((val) => val[0] >= 0 && val[1] >= 0);
+
+  return correctAntenodes.sort();
 }
 
 function identifyAntennas(matrix) {

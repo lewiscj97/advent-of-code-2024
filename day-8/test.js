@@ -80,4 +80,17 @@ describe('Day 8', () => {
 
     expect(output).to.deep.eq(expected);
   });
+
+  it('should only identify locations of nodes on the grid', () => {
+    const input = [
+      [1, 8], [4, 4]
+    ];
+    const expected = [
+      [0, 7]
+    ];
+
+    const output = calculateAntenodes(input);
+
+    expect(output[0]).to.have.members(expected[0]);
+  });
 });
