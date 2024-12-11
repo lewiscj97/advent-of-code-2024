@@ -1,3 +1,19 @@
+function optimiseFileArray(input) {
+  const fileArray = createFileArray(input);
+  const dotCount = fileArray.filter((val) => val === '.').length;
+
+  for (let i = -1; i > -fileArray.length; i--) {
+    const val = fileArray.at(i);
+    if (val !== '.') {
+      const firstEmptyIndex = fileArray.findIndex((element) => element === '.');
+      fileArray[firstEmptyIndex] = val;
+      fileArray[fileArray.length + i] = '.';
+    }
+  }
+
+  return fileArray;
+}
+
 function createFileArray(input) {
   let startId = 0;
   let fileArray = [];
@@ -22,4 +38,4 @@ function createFileArray(input) {
   return fileArray.map(String);
 }
 
-module.exports = { createFileArray };
+module.exports = { createFileArray, optimiseFileArray };

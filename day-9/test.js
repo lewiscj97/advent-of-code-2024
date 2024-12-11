@@ -1,4 +1,4 @@
-const { createFileArray } = require('./day9');
+const { createFileArray, optimiseFileArray } = require('./day9');
 const expect = require('chai').expect;
 
 describe('Day 9', () => {
@@ -15,6 +15,15 @@ describe('Day 9', () => {
     const expected = ['0', '0', '.', '.', '.', '1', '1', '1', '.', '.', '.', '2', '.', '.', '.', '3', '3', '3', '.', '4', '4', '.', '5', '5', '5', '5', '.', '6', '6', '6', '6', '.', '7', '7', '7', '.', '8', '8', '8', '8', '9', '9'];
 
     const response = createFileArray(input);
+
+    expect(response).to.deep.eq(expected);
+  });
+
+  it('calculates test solution', () => {
+    const input = '12345';
+    const expected = ['0', '2', '2', '1', '1', '1', '2', '2', '2', '.', '.', '.', '.', '.', '.'];
+
+    const response = optimiseFileArray(input);
 
     expect(response).to.deep.eq(expected);
   });
