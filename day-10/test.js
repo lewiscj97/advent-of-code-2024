@@ -1,4 +1,4 @@
-const { createMatrix, identifyTrailheads } = require("./day10");
+const { createMatrix, identifyTrailheads, traverseTrailheads } = require("./day10");
 const expect = require('chai').expect;
 
 describe('Day 10', () => {
@@ -35,5 +35,12 @@ describe('Day 10', () => {
       expect(response).to.deep.eq(expected);
     });
 
+    it('counts how many trailheads make it to a 9 in map', () => {
+      const expected = 1;
+
+      const response = traverseTrailheads(input);
+
+      expect(response).to.eq(expected);
+    });
   });
 });

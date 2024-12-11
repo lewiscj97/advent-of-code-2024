@@ -1,3 +1,71 @@
+function _traverseSingleTrailhead(matrix, trailhead) {
+  let count = 0;
+  let currentVal = 0;
+
+  const deltas = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0]
+  ];
+
+  let coords= deltas.filter((delta) => {
+    const x = trailhead[0] + delta[0];
+    const y = trailhead[1] + delta[1];
+    const value = matrix[x]?.[y]
+
+    if (value === currentVal + 1 && value !== undefined) {
+      return matrix[x][y];
+    }
+  });
+
+  currentVal++;
+
+  coords.forEach((coord) => {
+    const tempCoords = [];
+    deltas.forEach((delta) => {
+      const x = coord[0] + delta[0];
+      const y = coord[1] + delta[1];
+      const value = matrix[x]?.[y]
+
+      if (value === currentVal + 1 && value !== undefined) {
+        tempCoords.push([x, y]);
+      }
+    });
+    coords = tempCoords;
+  });
+
+  currentVal++;
+
+  coords.forEach((coord) => {
+    const tempCoords = [];
+    deltas.forEach((delta) => {
+      const x = coord[0] + delta[0];
+      const y = coord[1] + delta[1];
+      const value = matrix[x]?.[y]
+
+      if (value === currentVal + 1 && value !== undefined) {
+        tempCoords.push([x, y]);
+      }
+    });
+    coords = tempCoords;
+  });
+
+  return count;
+}
+
+function traverseTrailheads(matrix) {
+  const trailheads = identifyTrailheads(matrix);
+
+  let count = 0;
+
+  trailheads.forEach((trailhead) => {
+    count += _traverseSingleTrailhead(matrix, trailhead);
+  });
+
+  return count;
+}
+
 function identifyTrailheads(input) {
   const trailheadCoords = [];
 
@@ -18,4 +86,4 @@ function createMatrix(input) {
   });
 }
 
-module.exports = { createMatrix, identifyTrailheads }
+module.exports = { createMatrix, identifyTrailheads, traverseTrailheads }
