@@ -1,39 +1,41 @@
 const { createMatrix } = require("../day-4/day4");
 
-function findAllAntenodesNewRules(input, matrixSize) {
-  const pairs = [];
-
-  // find all combinations of coordinates
-  for (let i = 0; i < input.length-1; i++) {
-    for (let j = i; j < input.length-1; j++) {
-      pairs.push([input[i], input[j+1]]);
-    }
-  }
-
-  const antendodes = [];
-
-  pairs.forEach((pair) => {
-    antendodes.push(findAntenodesNewRules(pair, matrixSize));
-  });
-
-  return antendodes.flat().sort();
-}
-
 function findAntenodesNewRules(input, matrixSize) {
   const delta = [input[1][0] - input[0][0], input[1][1] - input[0][1]];
 
-  const xValues = [];
-  const yValues = [];
+  const antenodes = [];
 
-  for (let i = 0; input[0][0] - delta[0]*i >= 0 && input[0][0] - delta[0]*i <= matrixSize; i++) {
-    xValues.push([input[0][0] - delta[0]*i, input[0][1] - delta[1]*i]);
+  // first value
+  let xBreaker = true;
+  const firstVal = input[0];
+  while (xBreaker === true) {
+    for (let i = 0; i < 100; i++) {
+      const x = firstVal[0] - delta[0] * i;
+      const y = firstVal[1] - delta[1] * i;
+
+      if (x > matrixSize || x < 0 || y > matrixSize || y < 0) {
+        xBreaker = false;
+      } else {
+        antenodes.push([x,y]);
+      }
+    }
   }
 
-  for (let j = 0; input[1][1] + delta[1]*j <= matrixSize && input[1][1] + delta[1]*j >= 0; j++) {
-    yValues.push([input[1][0] + delta[0]*j, input[1][1] + delta[1]*j])
-  }
+  // second value
+  let yBreaker = true;
+  const nextVal = input[1];
+  while (yBreaker === true) {
+    for (let i = 0; i < 100; i++) {
+      const x = nextVal[0] + delta[0] * i;
+      const y = nextVal[1] + delta[1] * i;
 
-  const antenodes = xValues.concat(yValues);
+      if (x > matrixSize || x < 0 || y > matrixSize || y < 0) {
+        yBreaker = false;
+      } else {
+        antenodes.push([x,y]);
+      }
+    }
+  }
 
   return antenodes;
 }
@@ -101,5 +103,4 @@ module.exports = {
   calculateAllAntenodes,
   findAntenodesSolution,
   findAntenodesNewRules,
-  findAllAntenodesNewRules
 }
