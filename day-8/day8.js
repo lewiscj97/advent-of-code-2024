@@ -1,24 +1,16 @@
 const { createMatrix } = require('../day-4/day4');
 
-function findAllAntenodesCommon(input, matrixSize, func) {
-  const pairs = [];
+// Part 2
 
-  // find all combinations of coordinates
-  for (let i = 0; i < input.length-1; i++) {
-    for (let j = i; j < input.length-1; j++) {
-      pairs.push([input[i], input[j+1]]);
-    }
-  }
+function finalSolutionPart2(input) {
+  const matrix = createMatrix(input);
+  const matrixSize = matrix[0].length - 1;
+  const antennas = identifyAntennas(matrix);
+  const values = Object.values(antennas);
 
-  const antenodes = [];
+  const antenodes = values.map((vals) => findAllAntenodesNewRules(vals, matrixSize)).flat();
 
-  pairs.forEach((pair) => {
-    antenodes.push(func(pair, matrixSize));
-  });
-
-  const flatAntenodes = antenodes.flat()
-
-  return Array.from(new Set(flatAntenodes.map(JSON.stringify)), JSON.parse);
+  return Array.from(new Set(antenodes.map(JSON.stringify)), JSON.parse);
 }
 
 function findAllAntenodesNewRules(input, matrixSize) {
@@ -52,6 +44,7 @@ function findAntenodesNewRules(input, matrixSize) {
   ];
 }
 
+// Part 1
 function findAntenodesSolution(input) {
   const matrix = createMatrix(input);
   const matrixSize = matrix[0].length - 1;
@@ -79,6 +72,28 @@ function calculateAntenodes(input, matrixSize) {
   return correctAntenodes.sort();
 }
 
+// common
+function findAllAntenodesCommon(input, matrixSize, func) {
+  const pairs = [];
+
+  // find all combinations of coordinates
+  for (let i = 0; i < input.length-1; i++) {
+    for (let j = i; j < input.length-1; j++) {
+      pairs.push([input[i], input[j+1]]);
+    }
+  }
+
+  const antenodes = [];
+
+  pairs.forEach((pair) => {
+    antenodes.push(func(pair, matrixSize));
+  });
+
+  const flatAntenodes = antenodes.flat()
+
+  return Array.from(new Set(flatAntenodes.map(JSON.stringify)), JSON.parse);
+}
+
 function identifyAntennas(matrix) {
   const objects = {};
 
@@ -100,5 +115,6 @@ module.exports = {
   calculateAllAntenodes,
   findAntenodesSolution,
   findAntenodesNewRules,
-  findAllAntenodesNewRules
+  findAllAntenodesNewRules,
+  finalSolutionPart2
 }

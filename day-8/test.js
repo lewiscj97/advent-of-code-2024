@@ -5,7 +5,8 @@ const {
   calculateAllAntenodes,
   findAntenodesSolution,
   findAntenodesNewRules,
-  findAllAntenodesNewRules
+  findAllAntenodesNewRules,
+  finalSolutionPart2
 } = require('./day8');
 const fs = require('fs');
 const expect = require('chai').expect;
@@ -198,6 +199,14 @@ describe('Day 8', () => {
       const response = findAllAntenodesNewRules(input, matrixSize);
 
       expect(response).to.have.deep.members(expected);
+    });
+
+    it('should calculate number of antenodes for original test', () => {
+      const expected = 34;
+
+      const solution = finalSolutionPart2(input);
+
+      expect(solution.length).to.eq(expected)
     });
   });
 });
