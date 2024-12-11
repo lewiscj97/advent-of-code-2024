@@ -1,5 +1,8 @@
 const { createMatrix } = require("../day-4/day4");
-const { identifyAntennas } = require('./day8');
+const {
+  identifyAntennas,
+  calculateAntenodes,
+} = require('./day8');
 const expect = require('chai').expect;
 
 describe('Day 8', () => {
@@ -49,6 +52,19 @@ describe('Day 8', () => {
     };
 
     const output = identifyAntennas(matrix);
+    expect(output).to.deep.eq(expected);
+  });
+
+  it('should identify locations of nodes for a pair of values', () => {
+    const input = [
+      [1, 8], [2, 5]
+    ];
+    const expected = [
+      [0, 11], [3, 2]
+    ];
+
+    const output = calculateAntenodes(input);
+
     expect(output).to.deep.eq(expected);
   });
 });
