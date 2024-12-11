@@ -1,4 +1,4 @@
-const { createFileArray, optimiseFileArray } = require('./day9');
+const { createFileArray, optimiseFileArray, calculateChecksum } = require('./day9');
 const expect = require('chai').expect;
 
 describe('Day 9', () => {
@@ -35,5 +35,14 @@ describe('Day 9', () => {
     const response = optimiseFileArray(input);
 
     expect(response.join('')).to.deep.eq(expected);
+  });
+
+  it('calculates checksum', () => {
+    const input = '2333133121414131402';
+    const expected = 1928;
+
+    const response = calculateChecksum(input);
+
+    expect(response).to.eq(expected);
   });
 })

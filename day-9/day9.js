@@ -1,6 +1,18 @@
+function calculateChecksum(input) {
+  const fileArray = optimiseFileArray(input).map(Number, 0);
+  let checksum = 0;
+
+  fileArray.forEach((value, i) => {
+    if (!isNaN(value)) {
+      checksum += value*i;
+    }
+  });
+
+  return checksum;
+}
+
 function optimiseFileArray(input) {
   const fileArray = createFileArray(input);
-  const dotCount = fileArray.filter((val) => val === '.').length;
 
   for (let i = -1; i > -fileArray.length; i--) {
     const val = fileArray.at(i);
@@ -43,4 +55,4 @@ function createFileArray(input) {
   return fileArray.map(String);
 }
 
-module.exports = { createFileArray, optimiseFileArray };
+module.exports = { createFileArray, optimiseFileArray, calculateChecksum };
