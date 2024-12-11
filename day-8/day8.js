@@ -1,22 +1,41 @@
 const { createMatrix } = require("../day-4/day4");
 
+function findAllAntenodesNewRules(input, matrixSize) {
+  const pairs = [];
+
+  // find all combinations of coordinates
+  for (let i = 0; i < input.length-1; i++) {
+    for (let j = i; j < input.length-1; j++) {
+      pairs.push([input[i], input[j+1]]);
+    }
+  }
+
+  const antendodes = [];
+
+  pairs.forEach((pair) => {
+    antendodes.push(findAntenodesNewRules(pair, matrixSize));
+  });
+
+  return antendodes.flat().sort();
+}
+
 function findAntenodesNewRules(input, matrixSize) {
   const delta = [input[1][0] - input[0][0], input[1][1] - input[0][1]];
 
   const xValues = [];
   const yValues = [];
 
-  for (let i = 0; input[0][0] - delta[0]*i >= 0; i++) {
+  for (let i = 0; input[0][0] - delta[0]*i >= 0 && input[0][0] - delta[0]*i <= matrixSize; i++) {
     xValues.push([input[0][0] - delta[0]*i, input[0][1] - delta[1]*i]);
   }
 
-  for (let j = 0; input[1][1] + delta[1]*j <= matrixSize; j++) {
+  for (let j = 0; input[1][1] + delta[1]*j <= matrixSize && input[1][1] + delta[1]*j >= 0; j++) {
     yValues.push([input[1][0] + delta[0]*j, input[1][1] + delta[1]*j])
   }
 
   const antenodes = xValues.concat(yValues);
 
-  return antenodes.sort();
+  return antenodes;
 }
 
 function findAntenodesSolution(input) {
@@ -81,5 +100,6 @@ module.exports = {
   calculateAntenodes,
   calculateAllAntenodes,
   findAntenodesSolution,
-  findAntenodesNewRules
+  findAntenodesNewRules,
+  findAllAntenodesNewRules
 }
