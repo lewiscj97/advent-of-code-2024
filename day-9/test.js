@@ -19,12 +19,21 @@ describe('Day 9', () => {
     expect(response).to.deep.eq(expected);
   });
 
-  it('calculates test solution', () => {
+  it('calculates example solution', () => {
     const input = '12345';
     const expected = ['0', '2', '2', '1', '1', '1', '2', '2', '2', '.', '.', '.', '.', '.', '.'];
 
     const response = optimiseFileArray(input);
 
     expect(response).to.deep.eq(expected);
+  });
+
+  it('calculates test solution', () => {
+    const input = '2333133121414131402';
+    const expected = '0099811188827773336446555566..............';
+
+    const response = optimiseFileArray(input);
+
+    expect(response.join('')).to.deep.eq(expected);
   });
 })

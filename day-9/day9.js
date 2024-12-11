@@ -6,8 +6,13 @@ function optimiseFileArray(input) {
     const val = fileArray.at(i);
     if (val !== '.') {
       const firstEmptyIndex = fileArray.findIndex((element) => element === '.');
+      if (firstEmptyIndex > fileArray.length + i) {
+        break;
+      }
       fileArray[firstEmptyIndex] = val;
       fileArray[fileArray.length + i] = '.';
+    } else {
+
     }
   }
 
