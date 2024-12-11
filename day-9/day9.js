@@ -2,57 +2,61 @@ function optimiseFileArrayNoFragmentation(input) {
   const fileArray = createFileArray(input);
   let fileId = parseInt(fileArray.at(-1));
 
-  console.log(fileArray.toString());
-
   const intFileArray = fileArray.map(Number)
 
   for (fileId; fileId > 0; fileId--) {
-    const indexesOfId = [];
-    for (let j = 0; j < intFileArray.length; j++) {
-      if (intFileArray[j] === fileId) {
-        indexesOfId.push(j);
-      }
-    }
-
-    let blocksOfEmptySpace = [];
-
-    let i = 0;
-
-    while (i < fileArray.length) {
-      if (fileArray[i] === '.') {
-        const intermediateArr = [];
-        while (i < fileArray.length && fileArray[i] === '.') {
-          intermediateArr.push(i);
-          i++;
-        }
-        blocksOfEmptySpace.push(intermediateArr);
-      } else {
-        i++;
-      }
-    }
-
-    let keepAdding = true;
-
-    let x = 0;
-    while (keepAdding) {
-      const block = blocksOfEmptySpace[x];
-      if (block.length >= indexesOfId.length) {
-        for (let i = 0; i < indexesOfId.length; i++) {
-          if (indexesOfId[i] > block[i]) {
-            fileArray[indexesOfId[i]] = '.';
-            fileArray[block[i]] = fileId.toString();
-          }
-        }
-        break;
-      } else {
-        x++;
-        if (x > blocksOfEmptySpace.length-1) break;
-      }
-    }
-
+    const indexesOfId = _findIndexesForCurrentId(intFileArray, fileId);
+    const blocksOfEmptySpace = _findBlocksOfEmptySpace(fileArray);
+    _moveBlockOfIntegersToEmptySpace(fileArray, fileId, indexesOfId, blocksOfEmptySpace);
   }
 
   return fileArray;
+}
+
+function _moveBlockOfIntegersToEmptySpace(fileArray, fileId, indexesOfId, blocksOfEmptySpace) {
+  for (let x = 0; x < blocksOfEmptySpace.length; x++) {
+    const block = blocksOfEmptySpace[x];
+    if (block.length >= indexesOfId.length) {
+      indexesOfId.forEach((index, i) => {
+        if (index > block[i]) {
+          fileArray[index] = '.';
+          fileArray[block[i]] = fileId.toString();
+        }
+      });
+      break;
+    }
+  }
+}
+
+function _findBlocksOfEmptySpace(fileArray) {
+  const blocksOfEmptySpace = [];
+
+  let i = 0;
+
+  while (i < fileArray.length) {
+    if (fileArray[i] === '.') {
+      const intermediateArr = [];
+      while (i < fileArray.length && fileArray[i] === '.') {
+        intermediateArr.push(i);
+        i++;
+      }
+      blocksOfEmptySpace.push(intermediateArr);
+    } else {
+      i++;
+    }
+  }
+
+  return blocksOfEmptySpace;
+}
+
+function _findIndexesForCurrentId(fileArray, id) {
+  const indexesOfId = [];
+  for (let j = 0; j < fileArray.length; j++) {
+    if (fileArray[j] === id) {
+      indexesOfId.push(j);
+    }
+  }
+  return indexesOfId;
 }
 
 function calculateChecksum(input) {
