@@ -21,35 +21,25 @@ function _traverseSingleTrailhead(matrix, trailhead) {
 
   currentVal++;
 
-  coords.forEach((coord) => {
-    const tempCoords = [];
-    deltas.forEach((delta) => {
-      const x = coord[0] + delta[0];
-      const y = coord[1] + delta[1];
-      const value = matrix[x]?.[y]
+  for (currentVal; currentVal < 10; currentVal++) {
+    if (coords.length === 0) break;
+    coords.forEach((coord) => {
+      const tempCoords = [];
+      deltas.forEach((delta) => {
+        const x = coord[0] + delta[0];
+        const y = coord[1] + delta[1];
+        const value = matrix[x]?.[y]
 
-      if (value === currentVal + 1 && value !== undefined) {
-        tempCoords.push([x, y]);
-      }
+        if (value === currentVal + 1 && value !== undefined) {
+          if (value + 1 === 9) {
+            count++;
+          }
+          tempCoords.push([x, y]);
+        }
+      });
+      coords = tempCoords;
     });
-    coords = tempCoords;
-  });
-
-  currentVal++;
-
-  coords.forEach((coord) => {
-    const tempCoords = [];
-    deltas.forEach((delta) => {
-      const x = coord[0] + delta[0];
-      const y = coord[1] + delta[1];
-      const value = matrix[x]?.[y]
-
-      if (value === currentVal + 1 && value !== undefined) {
-        tempCoords.push([x, y]);
-      }
-    });
-    coords = tempCoords;
-  });
+  }
 
   return count;
 }
