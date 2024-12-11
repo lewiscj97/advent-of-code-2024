@@ -1,6 +1,6 @@
 const { createMatrix } = require('../day-4/day4');
 
-function findAllAntenodesNewRules(input, matrixSize) {
+function findAllAntenodesCommon(input, matrixSize, func) {
   const pairs = [];
 
   // find all combinations of coordinates
@@ -13,7 +13,7 @@ function findAllAntenodesNewRules(input, matrixSize) {
   const antenodes = [];
 
   pairs.forEach((pair) => {
-    antenodes.push(findAntenodesNewRules(pair, matrixSize));
+    antenodes.push(func(pair, matrixSize));
   });
 
   const flatAntenodes = antenodes.flat()
@@ -21,7 +21,11 @@ function findAllAntenodesNewRules(input, matrixSize) {
   return Array.from(new Set(flatAntenodes.map(JSON.stringify)), JSON.parse);
 }
 
-function commonFunc(start, delta, multiplier, matrixSize) {
+function findAllAntenodesNewRules(input, matrixSize) {
+  return findAllAntenodesCommon(input, matrixSize, findAntenodesNewRules)
+}
+
+function calculateCoordsInGivenDirection(start, delta, multiplier, matrixSize) {
   let breaker = true;
   let i = 0;
   const antenodes = [];
@@ -43,8 +47,8 @@ function findAntenodesNewRules(input, matrixSize) {
   const delta = [input[1][0] - input[0][0], input[1][1] - input[0][1]];
 
   return [
-    ...commonFunc(input[0], delta, -1, matrixSize),
-    ...commonFunc(input[1], delta, 1, matrixSize),
+    ...calculateCoordsInGivenDirection(input[0], delta, -1, matrixSize),
+    ...calculateCoordsInGivenDirection(input[1], delta, 1, matrixSize),
   ];
 }
 
@@ -60,22 +64,7 @@ function findAntenodesSolution(input) {
 }
 
 function calculateAllAntenodes(input, matrixLength) {
-  const pairs = [];
-
-  // find all combinations of coordinates
-  for (let i = 0; i < input.length-1; i++) {
-    for (let j = i; j < input.length-1; j++) {
-      pairs.push([input[i], input[j+1]]);
-    }
-  }
-
-  const antendodes = [];
-
-  pairs.forEach((pair) => {
-    antendodes.push(calculateAntenodes(pair, matrixLength));
-  });
-
-  return antendodes.flat().sort();
+  return findAllAntenodesCommon(input, matrixLength, calculateAntenodes);
 }
 
 function calculateAntenodes(input, matrixSize) {
