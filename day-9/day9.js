@@ -59,8 +59,8 @@ function _findIndexesForCurrentId(fileArray, id) {
   return indexesOfId;
 }
 
-function calculateChecksum(input) {
-  const fileArray = optimiseFileArray(input).map(Number, 0);
+function calculateChecksum(input, optimisingFunc) {
+  const fileArray = optimisingFunc(input).map(Number, 0);
   let checksum = 0;
 
   fileArray.forEach((value, i) => {
