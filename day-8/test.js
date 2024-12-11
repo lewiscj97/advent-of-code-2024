@@ -2,6 +2,7 @@ const { createMatrix } = require("../day-4/day4");
 const {
   identifyAntennas,
   calculateAntenodes,
+  calculateAllAntenodes
 } = require('./day8');
 const expect = require('chai').expect;
 
@@ -92,5 +93,19 @@ describe('Day 8', () => {
     const output = calculateAntenodes(input);
 
     expect(output[0]).to.have.members(expected[0]);
+  });
+
+  it('should find all antenodes for a type of antenna', () => {
+    const input = [
+      [5, 6], [8, 8], [9, 9]
+    ];
+
+    const expected = [
+      [7, 7], [10, 10], [11, 10], [2, 4], [1, 3]
+    ];
+
+    const output = calculateAllAntenodes(input);
+
+    expect(output).to.have.deep.members(expected.sort());
   });
 });
