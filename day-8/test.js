@@ -208,5 +208,14 @@ describe('Day 8', () => {
 
       expect(solution.length).to.eq(expected)
     });
+
+    it('should calculate final solution', () => {
+      const input = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-8/input.txt').toString();
+      const expected = 927;
+
+      const solution = finalSolutionPart2(input);
+
+      expect(solution.length).to.eq(expected)
+    });
   });
 });
