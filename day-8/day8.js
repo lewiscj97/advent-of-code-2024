@@ -1,6 +1,13 @@
-function findAntenodesSolution(input, matrixLength) {
-  const values = Object.values(input);
-  const antenodes = values.map((vals) => calculateAllAntenodes(vals, matrixLength)).flat();
+const { createMatrix } = require("../day-4/day4");
+
+function findAntenodesSolution(input) {
+  const matrix = createMatrix(input);
+  const matrixSize = matrix[0].length - 1;
+  const antennas = identifyAntennas(matrix);
+  const values = Object.values(antennas);
+
+
+  const antenodes = values.map((vals) => calculateAllAntenodes(vals, matrixSize)).flat();
 
   return Array.from(new Set(antenodes.map(JSON.stringify)), JSON.parse).length;
 }
