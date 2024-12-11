@@ -1,3 +1,11 @@
+function blinkTimes(input, times) {
+  let runningCount = input;
+  for (let x = 0; x < times; x++) {
+    runningCount = blink(runningCount);
+  }
+  return runningCount;
+}
+
 function blink(input) {
   const array = parseInput(input);
   return array.map(applyRules).flat().join(' ');
@@ -22,4 +30,4 @@ function parseInput(input) {
   return input.split(' ').map(Number);
 }
 
-module.exports = { parseInput, applyRules, blink }
+module.exports = { parseInput, applyRules, blink, blinkTimes }
