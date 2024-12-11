@@ -1,5 +1,5 @@
 function calculateTotalOfOperableCommands(input) {
-  const allOperableCommands = input.filter((val) => isOperable(val))
+  const allOperableCommands = input.filter((val) => isOperable(val.output, val.values))
 
   const initialValue = 0;
 
@@ -14,10 +14,7 @@ function parseFullInput(input) {
   return lines.map((line) => parseInput(line));
 }
 
-function isOperable(input) {
-  const output = input.output;
-  const values = input.values;
-
+function isOperable(target, values) {
   let options = [];
 
   // 2 vals
@@ -32,7 +29,7 @@ function isOperable(input) {
     }
   }
 
-  return options.includes(output);
+  return options.includes(target);
 }
 
 function parseInput(input) {

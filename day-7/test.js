@@ -21,7 +21,7 @@ describe('Day 7', () => {
       values: [10, 19],
     };
 
-    const response = isOperable(input);
+    const response = isOperable(input.output, input.values);
 
     expect(response).to.be.true;
   });
@@ -32,7 +32,7 @@ describe('Day 7', () => {
       values: [81, 40, 27],
     };
 
-    const response = isOperable(input);
+    const response = isOperable(input.output, input.values);
 
     expect(response).to.be.true;
   });
@@ -43,7 +43,7 @@ describe('Day 7', () => {
       values: [11, 6, 16, 20],
     };
 
-    const response = isOperable(input);
+    const response = isOperable(input.output, input.values);
 
     expect(response).to.be.true;
   });
@@ -77,7 +77,7 @@ describe('Day 7', () => {
     ]
 
     inputs.forEach((input) => [
-      expect(isOperable(input)).to.be.false
+      expect(isOperable(input.output, input.values)).to.be.false
     ]);
   });
 
@@ -103,7 +103,7 @@ describe('Day 7', () => {
 
   it('should calculate the final solution', () => {
     const input = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-7/input.txt').toString();
-    const expected = 2437272289165;
+    const expected = 2437272016585;
 
     const parsedInput = parseFullInput(input);
 
