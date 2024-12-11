@@ -58,7 +58,7 @@ describe('Day 10', () => {
       const expected = 2;
 
       const response = traverseTrailheads(matrix);
-      expect(response).to.eq(expected);
+      expect(response).to.eq(expected); // only works down one path
     });
   });
 });
