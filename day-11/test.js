@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { parseInput, applyRules } = require('./day11');
+const { parseInput, applyRules, blink } = require('./day11');
 
 describe('Day 11', () => {
   describe('Part 1', () => {
@@ -35,6 +35,15 @@ describe('Day 11', () => {
       const expected = 2021976;
 
       const response = applyRules(input);
+
+      expect(response).to.eq(expected);
+    });
+
+    it('should calculate new stones after blinking', () => {
+      const input = '0 1 10 99 999';
+      const expected = '1 2024 1 0 9 9 2021976';
+
+      const response = blink(input);
 
       expect(response).to.eq(expected);
     });

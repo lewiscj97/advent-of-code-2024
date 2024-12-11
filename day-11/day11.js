@@ -1,3 +1,8 @@
+function blink(input) {
+  const array = parseInput(input);
+  return array.map(applyRules).flat().join(' ');
+}
+
 function applyRules(input) {
   if (input === 0) {
     return 1;
@@ -17,4 +22,4 @@ function parseInput(input) {
   return input.split(' ').map(Number);
 }
 
-module.exports = { parseInput, applyRules }
+module.exports = { parseInput, applyRules, blink }
