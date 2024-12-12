@@ -1,3 +1,13 @@
+function calculateAllPerimeters(input, matrix) {
+  const perimeters = {};
+
+  for (const [key, value] of Object.entries(input)) {
+    perimeters[key] = calculatePerimeter(value, key, matrix);
+  }
+
+  return perimeters;
+}
+
 function calculatePerimeter(input, value, matrix) {
   let perimeter = 0;
   for (let i = 0; i < input.length; i++) {
@@ -58,5 +68,6 @@ function createMatrix(input) {
 module.exports = {
   createMatrix,
   identifyValuesAndLocations,
-  calculatePerimeter
+  calculatePerimeter,
+  calculateAllPerimeters
 }

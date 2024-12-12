@@ -2,7 +2,8 @@ const expect = require('chai').expect;
 const {
   createMatrix,
   identifyValuesAndLocations,
-  calculatePerimeter
+  calculatePerimeter,
+  calculateAllPerimeters,
 } = require('./day12');
 
 describe('Day 12', () => {
@@ -58,5 +59,37 @@ describe('Day 12', () => {
     const response = calculatePerimeter(input, value, matrix);
 
     expect(response).to.eq(expected);
+  });
+
+  it('should calculate total perimeter', () => {
+    const input = {
+      'A': [
+        [0,0], [0,1], [0,2], [0,3]
+      ],
+      'B': [
+        [1,0], [1,1], [2,0], [2,1]
+      ],
+      'C': [
+        [1,2], [2,2], [2,3], [3,3]
+      ],
+      'D': [
+        [1,3]
+      ],
+      'E': [
+        [3,0], [3,1], [3,2]
+      ],
+    };
+
+    const expected = {
+      'A': 10,
+      'B': 8,
+      'C': 10,
+      'D': 4,
+      'E': 8,
+    };
+
+    const response = calculateAllPerimeters(input, matrix);
+
+    expect(response).to.deep.eq(expected);
   });
 });
