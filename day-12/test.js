@@ -1,7 +1,8 @@
 const expect = require('chai').expect;
 const {
   createMatrix,
-  identifyValuesAndLocations
+  identifyValuesAndLocations,
+  calculatePerimeter
 } = require('./day12');
 
 describe('Day 12', () => {
@@ -47,5 +48,15 @@ describe('Day 12', () => {
     const response = identifyValuesAndLocations(matrix);
 
     expect(response).to.deep.eq(expected);
+  });
+
+  it('should calculate perimeter for a single set of coordinates', () => {
+    const input = [[0,0], [0,1], [0,2], [0,3]];
+    const expected = 10;
+    const value = 'A';
+
+    const response = calculatePerimeter(input, value, matrix);
+
+    expect(response).to.eq(expected);
   });
 });
