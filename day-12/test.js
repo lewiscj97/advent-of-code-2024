@@ -6,6 +6,7 @@ const {
   calculateAllPerimeters,
   calculateCost
 } = require('./day12');
+const fs = require('fs');
 
 describe('Day 12', () => {
 
@@ -93,6 +94,36 @@ describe('Day 12', () => {
     const matrix = createMatrix(input);
     const response = calculateCost(matrix);
     const expected = 772;
+
+    expect(response).to.eq(expected);
+  });
+
+  it('should calculate cost of matrix for test input', () => {
+    const input =
+      'RRRRIICCFF\n' +
+      'RRRRIICCCF\n' +
+      'VVRRRCCFFF\n' +
+      'VVRCCCJFFF\n' +
+      'VVVVCJJCFE\n' +
+      'VVIVCCJJEE\n' +
+      'VVIIICJJEE\n' +
+      'MIIIIIJJEE\n' +
+      'MIIISIJEEE\n' +
+      'MMMISSJEEE'
+
+    const matrix = createMatrix(input);
+    const response = calculateCost(matrix);
+    const expected = 1930;
+
+    expect(response).to.eq(expected);
+  });
+
+  it('should calculate final solution', () => {
+    const input = fs.readFileSync('/Users/lewis.jones/WebstormProjects/advent-of-code/day-12/input.txt').toString();
+
+    const matrix = createMatrix(input);
+    const response = calculateCost(matrix);
+    const expected = 1930;
 
     expect(response).to.eq(expected);
   });
