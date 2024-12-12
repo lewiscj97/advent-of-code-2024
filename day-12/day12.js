@@ -1,3 +1,21 @@
+function calculateCost(matrix) {
+  let cost = 0;
+
+  const valuesAndLocations = identifyValuesAndLocations(matrix);
+  const allPerimeters = calculateAllPerimeters(valuesAndLocations, matrix);
+
+  const values = Object.keys(valuesAndLocations);
+
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i];
+    const area = valuesAndLocations[value].length;
+    const perimeter = allPerimeters[value];
+    cost += area * perimeter;
+  }
+
+  return cost;
+}
+
 function calculateAllPerimeters(input, matrix) {
   const perimeters = {};
 
@@ -69,5 +87,6 @@ module.exports = {
   createMatrix,
   identifyValuesAndLocations,
   calculatePerimeter,
-  calculateAllPerimeters
+  calculateAllPerimeters,
+  calculateCost,
 }

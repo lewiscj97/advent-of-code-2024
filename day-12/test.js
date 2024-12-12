@@ -4,6 +4,7 @@ const {
   identifyValuesAndLocations,
   calculatePerimeter,
   calculateAllPerimeters,
+  calculateCost
 } = require('./day12');
 
 describe('Day 12', () => {
@@ -91,5 +92,13 @@ describe('Day 12', () => {
     const response = calculateAllPerimeters(input, matrix);
 
     expect(response).to.deep.eq(expected);
+  });
+
+  it('should calculate cost of matrix', () => {
+    const expected = 140;
+
+    const response = calculateCost(matrix);
+
+    expect(response).to.eq(expected);
   });
 });
