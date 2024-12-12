@@ -101,4 +101,19 @@ describe('Day 12', () => {
 
     expect(response).to.eq(expected);
   });
+
+  it('should calculate cost of matrix for different input', () => {
+    const input =
+      'OOOOO\n' +
+      'OXOXO\n' +
+      'OOOOO\n' +
+      'OXOXO\n' +
+      'OOOOO';
+
+    const matrix = createMatrix(input);
+    const response = calculateCost(matrix);
+    const expected = 772;
+
+    expect(response).to.eq(expected);
+  });
 });
