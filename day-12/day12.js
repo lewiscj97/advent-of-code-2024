@@ -1,15 +1,61 @@
+function identifyValuesAndLocations(matrix) {
+  const groups = [];
+  const visited = new Set();
+
+  const directions = [
+    [0, 1], // right
+    [1, 0], // down
+    [0, -1], // left
+    [-1, 0], // up
+  ];
+
+  function dfs(x, y, value, group) {
+    const key = `${x},${y}`;
+    if (
+      x < 0 ||
+      y < 0 ||
+      x >= matrix.length ||
+      y >= matrix[0].length ||
+      visited.has(key) ||
+      matrix[x][y] !== value
+    ) {
+      return;
+    }
+
+    visited.add(key);
+    group.push([x, y]);
+
+    for (const [dx, dy] of directions) {
+      dfs(x + dx, y + dy, value, group);
+    }
+  }
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      const key = `${i},${j}`;
+      if (!visited.has(key)) {
+        const value = matrix[i][j];
+        const group = [];
+        dfs(i, j, value, group);
+        groups.push([value, ...group]);
+      }
+    }
+  }
+
+  return groups;
+}
+
 function calculateCost(matrix) {
   let cost = 0;
 
   const valuesAndLocations = identifyValuesAndLocations(matrix);
   const allPerimeters = calculateAllPerimeters(valuesAndLocations, matrix);
 
-  const values = Object.keys(valuesAndLocations);
+  const values = valuesAndLocations.map((set) => set[0]);
 
   for (let i = 0; i < values.length; i++) {
-    const value = values[i];
-    const area = valuesAndLocations[value].length;
-    const perimeter = allPerimeters[value];
+    const area = valuesAndLocations[i].slice(1).length;
+    const perimeter = allPerimeters[i][1];
     cost += area * perimeter;
   }
 
@@ -17,11 +63,13 @@ function calculateCost(matrix) {
 }
 
 function calculateAllPerimeters(input, matrix) {
-  const perimeters = {};
+  const perimeters = [];
 
-  for (const [key, value] of Object.entries(input)) {
-    perimeters[key] = calculatePerimeter(value, key, matrix);
-  }
+  input.forEach((set) => {
+    const value = set[0];
+    const coords = set.slice(1);
+    perimeters.push([value, calculatePerimeter(coords, value, matrix)]);
+  });
 
   return perimeters;
 }
@@ -39,13 +87,13 @@ function calculatePerimeter(input, value, matrix) {
       [-1, 0],
     ]
     // up
-    adjacentCells.push(matrix[coord[0]-1]?.[coord[1]]);
+    adjacentCells.push(matrix[coord[0] - 1]?.[coord[1]]);
     // down
-    adjacentCells.push(matrix[coord[0]+1]?.[coord[1]]);
+    adjacentCells.push(matrix[coord[0] + 1]?.[coord[1]]);
     // left
-    adjacentCells.push(matrix[coord[0]]?.[coord[1]-1]);
+    adjacentCells.push(matrix[coord[0]]?.[coord[1] - 1]);
     // right
-    adjacentCells.push(matrix[coord[0]]?.[coord[1]+1]);
+    adjacentCells.push(matrix[coord[0]]?.[coord[1] + 1]);
 
     adjacentCells.forEach((val) => {
       if (val === undefined) {
@@ -55,27 +103,13 @@ function calculatePerimeter(input, value, matrix) {
         // do nothing
       }
       if (val !== value) {
-        return  coordinatePerimeterCount++;
+        return coordinatePerimeterCount++;
       }
     });
 
     perimeter += coordinatePerimeterCount;
   }
   return perimeter;
-}
-
-function identifyValuesAndLocations(matrix) {
-  const valuesAndLocations = {};
-  matrix.forEach((row, x) => {
-    row.forEach((val, y) => {
-      if (valuesAndLocations?.[val] !== undefined) {
-        valuesAndLocations[val].push([x, y]);
-      } else {
-        valuesAndLocations[val] = [[x,y]];
-      }
-    });
-  });
-  return valuesAndLocations;
 }
 
 function createMatrix(input) {
